@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Íris Sabores — Menu & Gestão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --card: #181818;
+  --card2: #1f1f1f;
+  --orange: #e85d04;
+  --orange2: #f48c06;
+  --amber: #ffba08;
+  --cream: #fdf0d5;
+  --text: #f0ede8;
+  --muted: #7a7570;
+  --border: #252525;
+  --border2: #2e2e2e;
+  --success: #27ae60;
+  --danger: #c0392b;
+  --info: #2980b9;
+  --warning: #e67e22;
+  --r: 10px;
+  --r2: 16px;
+  --shadow: 0 8px 32px rgba(0,0,0,.6);
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; font-weight: 700; line-height: 1.1; }
+.script { font-family: 'Dancing Script', cursive; }
+a { text-decoration: none; color: inherit; }
+button { font-family: 'Outfit', sans-serif; cursor: pointer; }
+input, select, textarea { font-family: 'Outfit', sans-serif; }
+img { max-width: 100%; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 10px; }
+
+/* ═══════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════ */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.flex-1 { flex: 1; }
+.w-full { width: 100%; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; }
+.text-lg { font-size: 18px; }
+.text-xl { font-size: 22px; }
+.text-2xl { font-size: 28px; }
+.fw-600 { font-weight: 600; }
+.fw-700 { font-weight: 700; }
+.text-orange { color: var(--orange); }
+.text-amber { color: var(--amber); }
+.text-muted { color: var(--muted); }
+.text-success { color: var(--success); }
+.text-danger { color: var(--danger); }
+.text-info { color: var(--info); }
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; }
+.mt-6 { margin-top: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.p-3 { padding: 12px; }
+.p-4 { padding: 16px; }
+.p-6 { padding: 24px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.overflow-auto { overflow: auto; }
+.relative { position: relative; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wrap { flex-wrap: wrap; }
+.hidden { display: none !important; }
+.block { display: block; }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 11px 24px; border-radius: var(--r); border: none;
+  font-size: 14px; font-weight: 600; transition: all .2s;
+  cursor: pointer; white-space: nowrap;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--orange); color: #fff; }
+.btn-primary:hover { background: var(--orange2); box-shadow: 0 4px 20px rgba(232,93,4,.4); }
+.btn-outline { background: transparent; border: 1.5px solid var(--orange); color: var(--orange); }
+.btn-outline:hover { background: var(--orange); color: #fff; }
+.btn-ghost { background: rgba(255,255,255,.05); border: 1px solid var(--border2); color: var(--text); }
+.btn-ghost:hover { background: rgba(255,255,255,.1); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-success:hover { filter: brightness(1.1); }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { filter: brightness(1.1); }
+.btn-info { background: var(--info); color: #fff; }
+.btn-info:hover { filter: brightness(1.1); }
+.btn-amber { background: var(--amber); color: #000; }
+.btn-sm { padding: 7px 14px; font-size: 12px; border-radius: 8px; }
+.btn-xs { padding: 4px 10px; font-size: 11px; border-radius: 6px; }
+.btn-icon { padding: 9px; border-radius: 50%; width: 38px; height: 38px; }
+.btn-lg { padding: 14px 32px; font-size: 16px; }
+
+/* ═══════════════════════════════════════════
+   FORM CONTROLS
+═══════════════════════════════════════════ */
+.form-group { margin-bottom: 14px; }
+.form-group label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .5px;
+}
+.form-control {
+  width: 100%; background: var(--card); border: 1.5px solid var(--border2);
+  color: var(--text); padding: 10px 14px; border-radius: var(--r);
+  font-size: 14px; transition: border-color .2s;
+}
+.form-control:focus { outline: none; border-color: var(--orange); }
+.form-control::placeholder { color: var(--muted); }
+select.form-control option { background: var(--card); }
+textarea.form-control { resize: vertical; min-height: 80px; line-height: 1.5; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ═══════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════ */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 20px;
+}
+.card-hover { transition: all .25s; }
+.card-hover:hover { border-color: var(--orange); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(232,93,4,.15); }
+
+/* ═══════════════════════════════════════════
+   BADGES / CHIPS
+═══════════════════════════════════════════ */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: .3px;
+}
+.badge-orange { background: rgba(232,93,4,.2); color: var(--orange); }
+.badge-green { background: rgba(39,174,96,.2); color: var(--success); }
+.badge-red { background: rgba(192,57,43,.2); color: var(--danger); }
+.badge-blue { background: rgba(41,128,185,.2); color: var(--info); }
+.badge-amber { background: rgba(255,186,8,.2); color: var(--amber); }
+.badge-grey { background: rgba(255,255,255,.08); color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════════ */
+.divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ═══════════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════════ */
+.page { display: none; min-height: 100vh; animation: pgIn .35s ease; }
+.page.active { display: block; }
+@keyframes pgIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+/* ═══════════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════════ */
+#topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  height: 62px;
+  background: rgba(10,10,10,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 20px; gap: 12px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  cursor: pointer; flex-shrink: 0;
+}
+.nav-logo .script { font-size: 26px; color: var(--orange); }
+.nav-logo small { font-size: 11px; color: var(--muted); font-weight: 500; }
+.nav-center { display: flex; gap: 2px; flex: 1; justify-content: center; }
+.nav-link {
+  background: none; border: none; color: var(--muted);
+  padding: 7px 14px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; transition: all .2s;
+}
+.nav-link:hover, .nav-link.active { color: var(--orange); background: rgba(232,93,4,.1); }
+.nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.cart-fab {
+  position: relative; background: var(--card); border: 1px solid var(--border2);
+  color: var(--text); width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s; font-size: 16px;
+}
+.cart-fab:hover { border-color: var(--orange); color: var(--orange); }
+.cart-badge {
+  position: absolute; top: -4px; right: -4px;
+  background: var(--orange); color: #fff;
+  border-radius: 50%; width: 18px; height: 18px;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.user-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--card); border: 1px solid var(--border2);
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all .2s;
+}
+.user-chip:hover { border-color: var(--orange); }
+.user-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--orange); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════
+   HOME / HERO
+═══════════════════════════════════════════ */
+.hero {
+  padding-top: 62px;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232,93,4,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(244,140,6,.07) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0a0a 0%, #0e0800 50%, #0a0a0a 100%);
+}
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0;
+}
+@keyframes float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: .6; }
+  90% { opacity: .2; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.hero-content { position: relative; z-index: 2; padding: 20px; max-width: 700px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(232,93,4,.15); border: 1px solid rgba(232,93,4,.4);
+  color: var(--orange); padding: 6px 16px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; letter-spacing: .5px;
+  margin-bottom: 20px; text-transform: uppercase;
+}
+.hero h1 { font-size: clamp(52px, 9vw, 100px); line-height: .95; margin-bottom: 6px; }
+.hero h1 em { color: var(--orange); font-style: normal; }
+.hero-sub { font-size: clamp(18px,3vw,24px); color: var(--muted); margin-bottom: 16px; }
+.hero-desc { font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+.hero-stats {
+  display: flex; gap: 32px; justify-content: center;
+  border-top: 1px solid var(--border); padding-top: 28px; flex-wrap: wrap;
+}
+.hero-stat-num { font-size: 28px; font-weight: 700; color: var(--orange); font-family: 'Cormorant Garamond', serif; }
+.hero-stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.hero-socials {
+  position: absolute; bottom: 32px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 20px; z-index: 2;
+}
+.social-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.05); border: 1px solid var(--border2);
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 12px; color: var(--muted); transition: all .2s;
+}
+.social-pill:hover { border-color: var(--orange); color: var(--orange); background: rgba(232,93,4,.1); }
+.social-pill i { font-size: 14px; }
+
+/* ═══════════════════════════════════════════
+   MENU PAGE
+═══════════════════════════════════════════ */
+.menu-page { padding-top: 78px; padding-bottom: 80px; }
+.page-header { padding: 28px 24px 0; max-width: 1300px; margin: 0 auto; }
+.page-title { font-size: clamp(32px,5vw,52px); margin-bottom: 4px; }
+.page-title span { color: var(--orange); }
+.page-sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+.cat-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding: 0 24px; max-width: 1300px; margin: 0 auto 28px;
+}
+.cat-tab {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted); padding: 7px 16px; border-radius: 20px;
+  font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: 5px;
+}
+.cat-tab:hover { border-color: var(--orange); color: var(--orange); }
+.cat-tab.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+.menu-container { padding: 0 24px; max-width: 1300px; margin: 0 auto; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; }
+.menu-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden;
+  transition: all .25s; position: relative; cursor: default;
+}
+.menu-item:hover { border-color: rgba(232,93,4,.5); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.5); }
+.menu-item-emoji {
+  height: 130px; display: flex; align-items: center; justify-content: center;
+  font-size: 56px; background: var(--card2);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+}
+.menu-item-cat {
+  position: absolute; top: 10px; left: 10px;
+}
+.menu-item-body { padding: 14px 16px 16px; }
+.menu-item-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.menu-item-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.5; min-height: 34px; }
+.menu-item-footer { display: flex; align-items: center; justify-content: space-between; }
+.menu-price { font-size: 19px; font-weight: 700; color: var(--orange); font-family: 'Cormorant Garamond', serif; }
+.menu-price small { font-size: 12px; font-weight: 400; color: var(--muted); font-family: 'Outfit', sans-serif; }
+.add-to-cart {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--orange); border: none; color: #fff;
+  font-size: 18px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s;
+}
+.add-to-cart:hover { background: var(--orange2); transform: scale(1.12); box-shadow: 0 4px 16px rgba(232,93,4,.5); }
+.stock-chip {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,.7); padding: 3px 8px; border-radius: 10px;
+  font-size: 10px; color: var(--muted);
+}
+.oos-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,.75);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: var(--danger);
+  letter-spacing: 1px; text-transform: uppercase;
+  border-radius: var(--r2);
+}
+
+/* ═══════════════════════════════════════════
+   CART DRAWER
+═══════════════════════════════════════════ */
+.drawer-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.75);
+  z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.cart-drawer {
+  position: fixed; right: 0; top: 0; bottom: 0;
+  width: 420px; max-width: 100vw;
+  background: var(--surface); border-left: 1px solid var(--border);
+  z-index: 1001; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .32s cubic-bezier(.4,0,.2,1);
+}
+.cart-drawer.open { transform: translateX(0); }
+.drawer-head {
+  padding: 18px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.drawer-head h3 { font-size: 20px; }
+.drawer-close {
+  background: rgba(255,255,255,.06); border: none; color: var(--muted);
+  width: 32px; height: 32px; border-radius: 50%; font-size: 14px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.drawer-close:hover { background: rgba(255,255,255,.12); color: var(--text); }
+.cart-body { flex: 1; overflow-y: auto; padding: 14px; }
+.cart-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; gap: 12px; color: var(--muted);
+}
+.cart-empty i { font-size: 48px; opacity: .3; }
+.cart-line {
+  display: flex; gap: 10px; padding: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); margin-bottom: 8px;
+}
+.cart-line-emoji { font-size: 28px; flex-shrink: 0; }
+.cart-line-info { flex: 1; min-width: 0; }
+.cart-line-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.cart-line-price { font-size: 13px; color: var(--orange); font-weight: 700; }
+.cart-qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.qty-btn {
+  background: var(--border2); border: none; color: var(--text);
+  width: 24px; height: 24px; border-radius: 50%; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.qty-btn:hover { background: var(--orange); }
+.cart-note-inp {
+  width: 100%; margin-top: 6px; background: var(--bg);
+  border: 1px solid var(--border); color: var(--text);
+  padding: 5px 8px; border-radius: 6px; font-size: 11px;
+}
+.cart-note-inp:focus { outline: none; border-color: var(--orange); }
+.remove-line {
+  background: none; border: none; color: var(--muted);
+  font-size: 13px; cursor: pointer; align-self: flex-start; padding: 2px 4px;
+}
+.remove-line:hover { color: var(--danger); }
+.drawer-foot { padding: 14px 16px; border-top: 1px solid var(--border); }
+.delivery-mode { display: flex; gap: 6px; margin-bottom: 12px; }
+.del-opt {
+  flex: 1; padding: 8px; background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--r); cursor: pointer; text-align: center;
+  font-size: 13px; font-weight: 500; transition: all .2s;
+}
+.del-opt:hover { border-color: rgba(232,93,4,.5); }
+.del-opt.sel { border-color: var(--orange); background: rgba(232,93,4,.1); color: var(--orange); }
+.cart-total-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 18px; font-weight: 700; margin-bottom: 12px;
+}
+.cart-total-row span:last-child { color: var(--orange); }
+
+/* ═══════════════════════════════════════════
+   CHECKOUT
+═══════════════════════════════════════════ */
+.checkout-wrap { max-width: 720px; margin: 0 auto; padding: 90px 20px 60px; }
+.steps-bar { display: flex; gap: 0; margin-bottom: 32px; border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
+.step-item {
+  flex: 1; padding: 14px 10px; text-align: center;
+  background: var(--card); font-size: 13px; font-weight: 500;
+  color: var(--muted); border-right: 1px solid var(--border);
+  transition: all .3s;
+}
+.step-item:last-child { border-right: none; }
+.step-item .step-n { font-size: 22px; font-weight: 700; display: block; margin-bottom: 2px; font-family: 'Cormorant Garamond', serif; }
+.step-item.active { background: rgba(232,93,4,.15); color: var(--orange); border-bottom: 2px solid var(--orange); }
+.step-item.done { background: rgba(39,174,96,.1); color: var(--success); }
+.checkout-panel { display: none; }
+.checkout-panel.active { display: block; }
+
+/* ═══════════════════════════════════════════
+   ORDERS / TRACKING
+═══════════════════════════════════════════ */
+.orders-wrap { max-width: 860px; margin: 0 auto; padding: 90px 20px 60px; }
+.order-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 18px 20px; margin-bottom: 14px;
+  transition: border-color .2s;
+}
+.order-card:hover { border-color: var(--border2); }
+.order-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.order-id { font-size: 15px; font-weight: 700; }
+.order-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.order-items { font-size: 13px; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
+.order-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.order-total { font-size: 20px; font-weight: 700; color: var(--orange); font-family: 'Cormorant Garamond', serif; }
+.order-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* TRACKING TIMELINE */
+.track-steps { display: flex; flex-direction: column; gap: 0; }
+.track-step { display: flex; gap: 14px; padding-bottom: 22px; position: relative; }
+.track-step:not(:last-child)::after {
+  content: ''; position: absolute;
+  left: 17px; top: 38px; bottom: 0; width: 2px;
+  background: var(--border); transition: background .5s;
+}
+.track-step.done::after { background: var(--success); }
+.track-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--muted); flex-shrink: 0; z-index: 1;
+  background: var(--bg); transition: all .3s;
+}
+.track-step.done .track-icon { border-color: var(--success); color: var(--success); background: rgba(39,174,96,.1); }
+.track-step.active .track-icon { border-color: var(--orange); color: var(--orange); background: rgba(232,93,4,.1); animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(232,93,4,.4); } 50% { box-shadow: 0 0 0 8px rgba(232,93,4,0); } }
+.track-content h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.track-content p { font-size: 12px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   STAR RATING
+═══════════════════════════════════════════ */
+.rating-stars { display: flex; gap: 6px; font-size: 28px; cursor: pointer; }
+.r-star { color: var(--border2); transition: color .15s; user-select: none; }
+.r-star.lit { color: var(--amber); }
+
+/* ═══════════════════════════════════════════
+   LOGIN PAGE
+═══════════════════════════════════════════ */
+.login-page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(232,93,4,.1) 0%, transparent 70%), var(--bg);
+  padding: 20px;
+}
+.login-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 40px 36px; width: 100%; max-width: 400px;
+  box-shadow: var(--shadow);
+}
+.login-logo { text-align: center; margin-bottom: 32px; }
+.login-logo .script { font-size: 44px; color: var(--orange); display: block; }
+.login-logo small { color: var(--muted); font-size: 13px; }
+
+/* ═══════════════════════════════════════════
+   ADMIN LAYOUT
+═══════════════════════════════════════════ */
+.admin-layout { display: flex; padding-top: 62px; min-height: 100vh; }
+.admin-sidebar {
+  width: 232px; flex-shrink: 0;
+  background: var(--surface); border-right: 1px solid var(--border);
+  position: fixed; top: 62px; bottom: 0; left: 0;
+  overflow-y: auto; padding: 16px 10px; z-index: 50;
+}
+.sidebar-brand { padding: 6px 8px 16px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+.sidebar-brand .script { font-size: 22px; color: var(--orange); }
+.sidebar-brand small { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.sidebar-section { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 12px 10px 4px; }
+.sidebar-btn {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; padding: 9px 12px; border-radius: 8px;
+  background: none; border: none; color: var(--muted);
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all .18s; text-align: left; margin-bottom: 2px;
+}
+.sidebar-btn i { width: 16px; text-align: center; font-size: 13px; }
+.sidebar-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.sidebar-btn.active { background: rgba(232,93,4,.15); color: var(--orange); }
+.admin-main { flex: 1; margin-left: 232px; padding: 28px; min-height: calc(100vh - 62px); }
+.admin-section { display: none; }
+.admin-section.active { display: block; animation: pgIn .3s ease; }
+.section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.section-head h2 { font-size: clamp(22px,3vw,32px); }
+.section-head h2 span { color: var(--orange); }
+
+/* ═══════════════════════════════════════════
+   STAT CARDS
+═══════════════════════════════════════════ */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 14px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 18px 20px;
+  position: relative; overflow: hidden;
+}
+.stat-glow {
+  position: absolute; top: -30px; right: -30px;
+  width: 100px; height: 100px; border-radius: 50%;
+  opacity: .12; pointer-events: none;
+}
+.stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 8px; }
+.stat-val { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 4px; font-family: 'Cormorant Garamond', serif; }
+.stat-sub { font-size: 12px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   DATA TABLE
+═══════════════════════════════════════════ */
+.table-wrap { overflow-x: auto; border-radius: var(--r2); border: 1px solid var(--border); }
+.data-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-tbl th {
+  padding: 11px 14px; text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--muted);
+  background: var(--card2);
+}
+.data-tbl td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.data-tbl tbody tr:last-child td { border-bottom: none; }
+.data-tbl tbody tr:hover td { background: rgba(255,255,255,.02); }
+
+/* ═══════════════════════════════════════════
+   CHARTS (CSS only)
+═══════════════════════════════════════════ */
+.bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 140px; }
+.bc-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+.bc-bar { width: 100%; border-radius: 4px 4px 0 0; background: linear-gradient(to top, var(--orange), var(--orange2)); min-height: 3px; transition: height .6s ease; }
+.bc-label { font-size: 10px; color: var(--muted); text-align: center; }
+.bc-val { font-size: 10px; color: var(--orange); font-weight: 600; }
+
+/* ═══════════════════════════════════════════
+   STOCK
+═══════════════════════════════════════════ */
+.stock-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 14px 16px; margin-bottom: 8px;
+}
+.stock-bar-wrap { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin: 8px 0 6px; }
+.stock-bar-fill { height: 100%; border-radius: 3px; transition: width .5s; }
+.stock-bar-fill.lvl-ok { background: var(--success); }
+.stock-bar-fill.lvl-mid { background: var(--warning); }
+.stock-bar-fill.lvl-low { background: var(--danger); }
+
+/* ═══════════════════════════════════════════
+   WORKER CARD
+═══════════════════════════════════════════ */
+.workers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; }
+.worker-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 18px; transition: border-color .2s;
+}
+.worker-card:hover { border-color: var(--border2); }
+.worker-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px;
+}
+.worker-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.worker-role { font-size: 12px; color: var(--orange); margin-bottom: 8px; }
+.worker-detail { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+
+/* ═══════════════════════════════════════════
+   MODALS
+═══════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.85);
+  z-index: 2000; display: flex; align-items: center; justify-content: center;
+  padding: 16px; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; width: 100%; max-width: 540px;
+  max-height: 92vh; overflow-y: auto;
+  transform: scale(.95); transition: transform .25s;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal-head { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.modal-head h3 { font-size: 20px; }
+.modal-body { padding: 22px 24px; }
+.modal-foot { padding: 14px 24px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ═══════════════════════════════════════════
+   TOASTS
+═══════════════════════════════════════════ */
+.toast-wrap { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+.toast {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; min-width: 260px; max-width: 340px;
+  pointer-events: all; animation: toastIn .3s ease;
+  box-shadow: var(--shadow);
+}
+.toast.t-success { border-color: var(--success); }
+.toast.t-error { border-color: var(--danger); }
+.toast.t-info { border-color: var(--info); }
+.toast.t-warning { border-color: var(--warning); }
+@keyframes toastIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.toast-close { margin-left: auto; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; }
+
+/* ═══════════════════════════════════════════
+   WEEKLY MENU
+═══════════════════════════════════════════ */
+.weekly-wrap { max-width: 1100px; margin: 0 auto; padding: 90px 20px 60px; }
+.weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 16px; }
+.weekly-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 20px; transition: all .2s;
+}
+.weekly-card:hover { border-color: rgba(232,93,4,.4); transform: translateY(-3px); }
+.weekly-day { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 8px; }
+.weekly-title { font-size: 20px; margin-bottom: 14px; }
+.weekly-dish { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.weekly-dish:last-of-type { border-bottom: none; }
+.weekly-note { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   REPORT SECTION
+═══════════════════════════════════════════ */
+.report-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--r2); padding: 20px; margin-bottom: 16px; }
+.report-block h3 { font-size: 18px; margin-bottom: 14px; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .admin-sidebar { transform: translateX(-100%); transition: transform .3s; }
+  .admin-sidebar.mobile-open { transform: translateX(0); }
+  .admin-main { margin-left: 0; }
+  .nav-center { display: none; }
+  #mobile-menu-btn { display: flex !important; }
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 48px; }
+  .hero-socials { flex-wrap: wrap; padding: 0 16px; }
+  .cart-drawer { width: 100vw; }
+  .admin-main { padding: 16px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     TOP NAV
+══════════════════════════════════ -->
+<nav id="topnav">
+  <div class="nav-logo" onclick="nav('home')">
+    <span class="script">Íris</span>
+    <small>Sabores</small>
+  </div>
+  <div class="nav-center" id="nav-center">
+    <button class="nav-link" onclick="nav('home')">Início</button>
+    <button class="nav-link" onclick="nav('menu')">Menu</button>
+    <button class="nav-link" onclick="nav('weekly')">Menu Semana</button>
+    <button class="nav-link" onclick="nav('orders')">Meus Pedidos</button>
+  </div>
+  <div class="nav-right">
+    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" style="display:none;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer"><i class="fas fa-bars"></i></button>
+    <button class="cart-fab" onclick="openCart()">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+    <div class="user-chip" id="user-chip" onclick="userChipClick()">
+      <div class="user-avatar" id="user-avatar">?</div>
+      <span id="user-chip-label">Entrar</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     CART DRAWER
+══════════════════════════════════ -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="drawer-head">
+    <h3><i class="fas fa-shopping-cart" style="color:var(--orange);margin-right:8px"></i>Carrinho</h3>
+    <button class="drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="drawer-foot">
+    <div class="delivery-mode">
+      <div class="del-opt sel" id="del-opt-1" onclick="setDelMode(true)">🛵 Entrega ao domicílio</div>
+      <div class="del-opt" id="del-opt-2" onclick="setDelMode(false)">🏃 Retirar no local</div>
+    </div>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cart-total-lbl">0 MT</span>
+    </div>
+    <button class="btn btn-primary w-full btn-lg" onclick="goToCheckout()">
+      <i class="fas fa-lock"></i> Finalizar Pedido
+    </button>
+    <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--muted)">
+      <i class="fas fa-shield-alt"></i> Pagamento seguro · Confirmação em 3 passos
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="hero-particles"></div>
+    <div class="hero-content">
+      <div class="hero-tag"><i class="fas fa-fire"></i> Beira's Finest Take-Away</div>
+      <h1>Sabor que<br><em>Transforma</em></h1>
+      <p class="hero-sub script">Íris Sabores</p>
+      <p class="hero-desc">Do melhor frango grelhado da Beira aos mariscos mais frescos. Encomende agora com rastreio em tempo real e entrega na sua porta.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" onclick="nav('menu')"><i class="fas fa-utensils"></i> Ver Menu Completo</button>
+        <button class="btn btn-ghost btn-lg" onclick="nav('weekly')"><i class="fas fa-calendar-week"></i> Menu da Semana</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num" id="hs-orders">0</div>
+          <div class="hero-stat-label">Pedidos feitos</div>
+        </div>
+        <div>
+          <div class="hero-stat-num" id="hs-items">53+</div>
+          <div class="hero-stat-label">Itens no menu</div>
+        </div>
+        <div>
+          <div class="hero-stat-num" id="hs-rating">★ 5.0</div>
+          <div class="hero-stat-label">Avaliação média</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-socials">
+      <a class="social-pill" href="https://wa.me/258878743430" target="_blank"><i class="fab fa-whatsapp"></i> 878 743 430</a>
+      <a class="social-pill" href="mailto:irissabores@gmail.com" target="_blank"><i class="fas fa-envelope"></i> irissabores@gmail.com</a>
+      <a class="social-pill" href="https://instagram.com/irissabores_" target="_blank"><i class="fab fa-instagram"></i> @irissabores_</a>
+      <a class="social-pill" href="https://instagram.com/iris_sabores_" target="_blank"><i class="fab fa-instagram"></i> @iris_sabores_</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: MENU
+══════════════════════════════════ -->
+<div class="page" id="page-menu">
+  <div class="menu-page">
+    <div class="page-header">
+      <h1 class="page-title">Menu <span>Completo</span></h1>
+      <p class="page-sub">Escolha os seus pratos favoritos · Adicione ao carrinho · Receba em casa</p>
+    </div>
+    <div class="cat-tabs" id="cat-tabs"></div>
+    <div class="menu-container">
+      <div class="menu-grid" id="menu-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: CHECKOUT
+══════════════════════════════════ -->
+<div class="page" id="page-checkout">
+  <div class="checkout-wrap">
+    <h1 class="page-title" style="margin-bottom:24px">Finalizar <span>Pedido</span></h1>
+    <div class="steps-bar">
+      <div class="step-item active" id="si-1"><span class="step-n">1</span>Os seus dados</div>
+      <div class="step-item" id="si-2"><span class="step-n">2</span>Entrega</div>
+      <div class="step-item" id="si-3"><span class="step-n">3</span>Confirmação</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="checkout-panel active" id="cp-1">
+      <div class="card mb-4">
+        <h3 style="font-size:20px;margin-bottom:16px">Dados do Cliente</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Nome Completo *</label><input class="form-control" id="co-name" placeholder="Ex: João Machava"></div>
+          <div class="form-group"><label>Telemóvel *</label><input class="form-control" id="co-phone" placeholder="+258 8X XXX XXXX" type="tel"></div>
+        </div>
+        <div class="form-group"><label>Email (opcional)</label><input class="form-control" id="co-email" placeholder="email@exemplo.com" type="email"></div>
+        <div class="form-group">
+          <label>Nota especial para o restaurante</label>
+          <textarea class="form-control" id="co-note" placeholder="Ex: Sem cebola, bem passado, molho à parte, alergia a amendoim..."></textarea>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button class="btn btn-ghost" onclick="nav('menu')">← Voltar ao menu</button>
+        <button class="btn btn-primary flex-1" onclick="coNext(2)">Continuar <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="checkout-panel" id="cp-2">
+      <div class="card mb-4">
+        <h3 style="font-size:20px;margin-bottom:16px">Local de Entrega</h3>
+        <div id="map-placeholder" style="height:220px;background:var(--card2);border:1px solid var(--border);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;color:var(--muted);font-size:14px;cursor:pointer" onclick="requestLocation()">
+          <i class="fas fa-map-marker-alt" style="font-size:36px;color:var(--orange)"></i>
+          <span id="map-status">Clique para usar a sua localização actual</span>
+          <span style="font-size:11px;color:var(--muted)">O Google Maps irá abrir para rastreio da entrega</span>
+        </div>
+        <div class="form-group"><label>Endereço completo *</label><input class="form-control" id="co-address" placeholder="Rua, número, bairro, cidade..."></div>
+        <div class="form-row">
+          <div class="form-group"><label>Referência</label><input class="form-control" id="co-ref" placeholder="Perto de..."></div>
+          <div class="form-group"><label>Bairro</label><input class="form-control" id="co-neighborhood" placeholder="Ex: Chaimite, Manga..."></div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button class="btn btn-ghost" onclick="coNext(1)"><i class="fas fa-arrow-left"></i> Voltar</button>
+        <button class="btn btn-primary flex-1" onclick="coNext(3)">Continuar <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="checkout-panel" id="cp-3">
+      <div class="card mb-4" id="order-summary"></div>
+      <div class="card mb-4">
+        <h3 style="font-size:18px;margin-bottom:14px">Método de Pagamento</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="pay-methods">
+          <div class="del-opt sel" data-pay="mpesa" onclick="selectPay(this)">💳 M-Pesa</div>
+          <div class="del-opt" data-pay="emola" onclick="selectPay(this)">📱 e-Mola</div>
+          <div class="del-opt" data-pay="cash" onclick="selectPay(this)">💵 Dinheiro</div>
+          <div class="del-opt" data-pay="ponto24" onclick="selectPay(this)">🏧 Ponto 24</div>
+        </div>
+      </div>
+      <div style="background:rgba(232,93,4,.08);border:1px solid rgba(232,93,4,.3);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;line-height:1.8">
+        <div style="font-weight:700;color:var(--orange);margin-bottom:6px"><i class="fas fa-shield-alt"></i> Verificação em 3 Passos</div>
+        <div>✅ <strong>Passo 1:</strong> Restaurante confirma e começa a preparar o pedido</div>
+        <div>🛵 <strong>Passo 2:</strong> Entregador confirma a recolha e vai até si</div>
+        <div>🙏 <strong>Passo 3:</strong> Você confirma o recebimento do pedido</div>
+      </div>
+      <div class="flex gap-3">
+        <button class="btn btn-ghost" onclick="coNext(2)"><i class="fas fa-arrow-left"></i> Voltar</button>
+        <button class="btn btn-primary flex-1 btn-lg" onclick="placeOrder()"><i class="fas fa-check-circle"></i> Confirmar Pedido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: ORDERS
+══════════════════════════════════ -->
+<div class="page" id="page-orders">
+  <div class="orders-wrap">
+    <div class="section-head">
+      <div>
+        <h1 class="page-title">Meus <span>Pedidos</span></h1>
+        <p class="page-sub">Acompanhe os seus pedidos em tempo real</p>
+      </div>
+      <button class="btn btn-primary" onclick="nav('menu')"><i class="fas fa-plus"></i> Novo Pedido</button>
+    </div>
+    <div id="orders-list"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: WEEKLY MENU
+══════════════════════════════════ -->
+<div class="page" id="page-weekly">
+  <div class="weekly-wrap">
+    <div class="section-head">
+      <div>
+        <h1 class="page-title">Menu da <span>Semana</span></h1>
+        <p class="page-sub">Pratos especiais a 400 MT · Inclui sopa de entrada · Segunda a Sexta</p>
+      </div>
+    </div>
+    <div class="weekly-grid" id="weekly-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: LOGIN
+══════════════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <span class="script">Íris Sabores</span>
+        <small>Área Restrita — Acesso de Staff</small>
+      </div>
+      <div class="form-group"><label>Email</label><input class="form-control" id="login-email" placeholder="admin@irissabores.com" type="email" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="relative">
+          <input class="form-control" id="login-pass" placeholder="••••••••" type="password" onkeydown="if(event.key==='Enter')doLogin()" style="padding-right:44px">
+          <button onclick="togglePw()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer"><i class="fas fa-eye" id="pw-eye"></i></button>
+        </div>
+      </div>
+      <button class="btn btn-primary w-full btn-lg" style="margin-top:4px" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      <div style="text-align:center;margin-top:20px">
+        <button onclick="nav('home')" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer">← Voltar ao site</button>
+      </div>
+      <div style="margin-top:20px;padding:12px;background:var(--card);border-radius:var(--r);font-size:12px;color:var(--muted)">
+        <strong style="color:var(--orange)">Demo Admin:</strong> admin@irissabores.com / iris2024
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: ADMIN
+══════════════════════════════════ -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="script" style="font-size:22px;color:var(--orange)">Íris Sabores</div>
+        <small id="sb-role">Administrador</small>
+      </div>
+      <div class="sidebar-section">Principal</div>
+      <button class="sidebar-btn active" onclick="aSection('dashboard')"><i class="fas fa-tachometer-alt"></i>Dashboard</button>
+      <button class="sidebar-btn" onclick="aSection('orders-admin')"><i class="fas fa-receipt"></i>Pedidos</button>
+      <div class="sidebar-section">Gestão</div>
+      <button class="sidebar-btn" onclick="aSection('cash')"><i class="fas fa-cash-register"></i>Caixa</button>
+      <button class="sidebar-btn" onclick="aSection('stock')"><i class="fas fa-boxes"></i>Stock</button>
+      <button class="sidebar-btn" onclick="aSection('menu-admin')"><i class="fas fa-utensils"></i>Menu</button>
+      <div class="sidebar-section">Equipa</div>
+      <button class="sidebar-btn" onclick="aSection('workers')"><i class="fas fa-users"></i>Funcionários</button>
+      <button class="sidebar-btn admin-only" onclick="aSection('accounts')" style="display:none"><i class="fas fa-user-plus"></i>Contas</button>
+      <div class="sidebar-section">Análise</div>
+      <button class="sidebar-btn" onclick="aSection('reports')"><i class="fas fa-chart-bar"></i>Relatórios</button>
+      <div class="divider"></div>
+      <button class="sidebar-btn" onclick="doLogout()" style="color:var(--danger)"><i class="fas fa-sign-out-alt"></i>Terminar Sessão</button>
+    </div>
+
+    <!-- MAIN -->
+    <div class="admin-main" id="admin-main">
+      <!-- Dashboard -->
+      <div class="admin-section active" id="as-dashboard"></div>
+      <!-- Orders -->
+      <div class="admin-section" id="as-orders-admin"></div>
+      <!-- Cash -->
+      <div class="admin-section" id="as-cash"></div>
+      <!-- Stock -->
+      <div class="admin-section" id="as-stock"></div>
+      <!-- Menu Admin -->
+      <div class="admin-section" id="as-menu-admin"></div>
+      <!-- Workers -->
+      <div class="admin-section" id="as-workers"></div>
+      <!-- Accounts -->
+      <div class="admin-section" id="as-accounts"></div>
+      <!-- Reports -->
+      <div class="admin-section" id="as-reports"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODALS
+══════════════════════════════════ -->
+
+<!-- Tracking Modal -->
+<div class="modal-overlay" id="m-tracking">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-map-marker-alt" style="color:var(--orange)"></i> Rastrear Pedido</h3>
+      <button class="drawer-close" onclick="closeModal('m-tracking')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="m-tracking-body"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('m-tracking')">Fechar</button>
+      <a id="tracking-maps-link" class="btn btn-primary" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ver no Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- Rating Modal -->
+<div class="modal-overlay" id="m-rating">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-star" style="color:var(--amber)"></i> Avaliar Pedido</h3>
+      <button class="drawer-close" onclick="closeModal('m-rating')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <p class="text-muted mb-4">Como avalia a sua experiência com o Íris Sabores?</p>
+      <div class="rating-stars mb-4" id="rating-stars">
+        <span class="r-star" data-v="1">★</span>
+        <span class="r-star" data-v="2">★</span>
+        <span class="r-star" data-v="3">★</span>
+        <span class="r-star" data-v="4">★</span>
+        <span class="r-star" data-v="5">★</span>
+      </div>
+      <div id="rating-label" style="font-size:14px;color:var(--muted);margin-bottom:16px">Seleccione uma classificação</div>
+      <div class="form-group">
+        <label>Comentário (opcional)</label>
+        <textarea class="form-control" id="rating-comment" placeholder="Diga-nos o que achou da comida, do serviço, da entrega..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('m-rating')">Cancelar</button>
+      <button class="btn btn-amber" onclick="submitRating()"><i class="fas fa-star"></i> Enviar Avaliação</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit Menu Item Modal -->
+<div class="modal-overlay" id="m-menu-item">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="m-item-title">Adicionar Item ao Menu</h3>
+      <button class="drawer-close" onclick="closeModal('m-menu-item')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Nome *</label><input class="form-control" id="mi-name"></div>
+        <div class="form-group"><label>Emoji</label><input class="form-control" id="mi-emoji" placeholder="🍕" style="font-size:24px"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Categoria *</label>
+          <select class="form-control" id="mi-cat">
+            <option>Entradas</option><option>Saladas</option><option>Sandes</option>
+            <option>Refeições</option><option>Mariscos</option><option>Pizzas</option>
+            <option>Sobremesas</option><option>Bebidas</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Preço (MT) *</label><input class="form-control" id="mi-price" type="number" min="0"></div>
+      </div>
+      <div class="form-group"><label>Descrição</label><textarea class="form-control" id="mi-desc" style="min-height:60px"></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>Stock actual</label><input class="form-control" id="mi-stock" type="number" value="50" min="0"></div>
+        <div class="form-group"><label>Activo</label>
+          <select class="form-control" id="mi-active"><option value="1">Sim</option><option value="0">Não</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('m-menu-item')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveMenuItem()"><i class="fas fa-save"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Worker / Account Modal -->
+<div class="modal-overlay" id="m-worker">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="m-worker-title">Criar Conta de Funcionário</h3>
+      <button class="drawer-close" onclick="closeModal('m-worker')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Nome Completo *</label><input class="form-control" id="w-name"></div>
+        <div class="form-group"><label>Função / Cargo *</label><input class="form-control" id="w-role" placeholder="Cozinheiro, Entregador..."></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email (login) *</label><input class="form-control" id="w-email" type="email"></div>
+        <div class="form-group"><label>Password *</label><input class="form-control" id="w-pass" type="password"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Horário</label><input class="form-control" id="w-hours" placeholder="08:00 – 17:00"></div>
+        <div class="form-group"><label>Tipo de Acesso *</label>
+          <select class="form-control" id="w-type">
+            <option value="worker">Funcionário (Vendas)</option>
+            <option value="delivery">Entregador</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('m-worker')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveWorker()"><i class="fas fa-user-plus"></i> Criar Conta</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Cash Movement Modal -->
+<div class="modal-overlay" id="m-cash">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="m-cash-title">Registar Movimento</h3>
+      <button class="drawer-close" onclick="closeModal('m-cash')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label>Descrição *</label><input class="form-control" id="cash-desc" placeholder="Ex: Compra de ingredientes"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Valor (MT) *</label><input class="form-control" id="cash-val" type="number" min="1" placeholder="0"></div>
+        <div class="form-group"><label>Categoria</label>
+          <select class="form-control" id="cash-cat">
+            <option>Venda</option><option>Compra</option><option>Salário</option><option>Despesa</option><option>Outro</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('m-cash')">Cancelar</button>
+      <button class="btn btn-primary" id="cash-save-btn" onclick="saveCashMovement()"><i class="fas fa-save"></i> Registar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Stock Item Modal -->
+<div class="modal-overlay" id="m-stock">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Adicionar Produto ao Armazém</h3>
+      <button class="drawer-close" onclick="closeModal('m-stock')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Nome *</label><input class="form-control" id="sk-name"></div>
+        <div class="form-group"><label>Unidade</label><input class="form-control" id="sk-unit" placeholder="kg, L, uni..."></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label>Qtd. Actual</label><input class="form-control" id="sk-qty" type="number" value="0" min="0"></div>
+        <div class="form-group"><label>Mínimo</label><input class="form-control" id="sk-min" type="number" value="10" min="0"></div>
+        <div class="form-group"><label>Máximo</label><input class="form-control" id="sk-max" type="number" value="100" min="0"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('m-stock')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveStockItem()"><i class="fas fa-save"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   DATABASE — localStorage persistence
+═══════════════════════════════════════════════════════════ */
+const DB = {
+  get: k => { try { return JSON.parse(localStorage.getItem('iris_' + k)); } catch { return null; } },
+  set: (k, v) => localStorage.setItem('iris_' + k, JSON.stringify(v)),
+  push: (k, v) => { const a = DB.get(k) || []; a.push(v); DB.set(k, a); return a; },
+  del: k => localStorage.removeItem('iris_' + k),
+};
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════ */
+const today = () => new Date().toISOString().split('T')[0];
+const nowTime = () => new Date().toLocaleTimeString('pt', { hour: '2-digit', minute: '2-digit' });
+const fmtMT = n => Number(n).toLocaleString('pt-MZ') + ' MT';
+const uid = () => 'id_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
+const oid = () => 'ORD-' + Date.now().toString().slice(-6);
+const $ = id => document.getElementById(id);
+const dateStr = d => new Date(d).toLocaleDateString('pt', { day: '2-digit', month: '2-digit', year: 'numeric' });
+function isThisWeek(dateStr) {
+  const d = new Date(dateStr), now = new Date();
+  const sw = new Date(now); sw.setDate(now.getDate() - now.getDay());
+  return d >= sw && d <= now;
+}
+function isThisMonth(dateStr) {
+  return dateStr && dateStr.startsWith(today().slice(0, 7));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEED DATA
+═══════════════════════════════════════════════════════════ */
+function seed() {
+  if (DB.get('seeded')) return;
+  DB.set('users', [{ id: 'u1', name: 'Administrador', email: 'admin@irissabores.com', pass: 'iris2024', role: 'admin' }]);
+  DB.set('menu', defaultMenu());
+  DB.set('stock', defaultStock());
+  DB.set('workers', [
+    { id: 'w1', name: 'Ana Miriam', role: 'Cozinheira', hours: '07:00 – 15:00', email: 'ana@iris.com', pass: 'iris123', type: 'worker' },
+    { id: 'w2', name: 'Carlos Mwale', role: 'Entregador', hours: '10:00 – 22:00', email: 'carlos@iris.com', pass: 'iris123', type: 'delivery' },
+    { id: 'w3', name: 'Sofia Nhantumbo', role: 'Atendimento', hours: '09:00 – 17:00', email: 'sofia@iris.com', pass: 'iris123', type: 'worker' },
+  ]);
+  DB.set('cash_movements', [
+    { id: uid(), type: 'entrada', cat: 'Outro', desc: 'Abertura de caixa', amount: 5000, date: today(), time: '08:00' },
+  ]);
+  DB.set('orders', []);
+  DB.set('seeded', true);
+}
+
+function defaultMenu() {
+  return [
+    // Entradas
+    { id:'m1',  name:'Chamussas',         cat:'Entradas',    price:50,   emoji:'🥟', desc:'Pastéis estaladiços recheados de carne temperada',           stock:100, active:true },
+    { id:'m2',  name:'Rissóis',           cat:'Entradas',    price:50,   emoji:'🥐', desc:'Rissóis caseiros fritos na hora',                           stock:80,  active:true },
+    { id:'m3',  name:'Coxinhas',          cat:'Entradas',    price:50,   emoji:'🍗', desc:'Coxinhas crocantes de frango',                              stock:80,  active:true },
+    { id:'m4',  name:'SpringRoll',        cat:'Entradas',    price:50,   emoji:'🌯', desc:'Rolinhos primavera crocantes com recheio especial',         stock:60,  active:true },
+    { id:'m5',  name:'Sopa do dia',       cat:'Entradas',    price:100,  emoji:'🍲', desc:'Sopa caseira do dia, feita com legumes frescos',            stock:30,  active:true },
+    { id:'m6',  name:'Azeitonas Pretas',  cat:'Entradas',    price:150,  emoji:'🫒', desc:'Azeitonas pretas em azeite e ervas aromáticas',            stock:50,  active:true },
+    { id:'m7',  name:'Azeitonas Verdes',  cat:'Entradas',    price:150,  emoji:'🟢', desc:'Azeitonas verdes marinadas com alho e limão',              stock:50,  active:true },
+    // Saladas
+    { id:'m8',  name:'Salada Normal',     cat:'Saladas',     price:150,  emoji:'🥗', desc:'Salada mista de legumes frescos da época',                 stock:40,  active:true },
+    { id:'m9',  name:'Salada Mista',      cat:'Saladas',     price:200,  emoji:'🥗', desc:'Variedade de vegetais com molho especial da casa',         stock:40,  active:true },
+    { id:'m10', name:'Salada Grega',      cat:'Saladas',     price:250,  emoji:'🧀', desc:'Queijo feta, azeitonas, pepino, tomate e orégãos',         stock:30,  active:true },
+    { id:'m11', name:'Salada de Galinha', cat:'Saladas',     price:300,  emoji:'🍗', desc:'Peito de frango grelhado em cama de alface',               stock:25,  active:true },
+    { id:'m12', name:'Salada de Camarão', cat:'Saladas',     price:350,  emoji:'🦐', desc:'Camarão grelhado sobre salada fresca com molho de iogurte',stock:20,  active:true },
+    // Sandes
+    { id:'m13', name:'Sandes de Ovo',               cat:'Sandes', price:130, emoji:'🥚', desc:'Ovo estrelado com alface e maionese artesanal',     stock:40, active:true },
+    { id:'m14', name:'Sandes Mista',                cat:'Sandes', price:150, emoji:'🥪', desc:'Fiambre, queijo e alface no pão artesanal',        stock:40, active:true },
+    { id:'m15', name:'Sandes de Fiambre',           cat:'Sandes', price:150, emoji:'🥩', desc:'Fiambre premium com molho especial',               stock:35, active:true },
+    { id:'m16', name:'Cachorro Quente Simples',     cat:'Sandes', price:170, emoji:'🌭', desc:'Salsicha, mostarda e ketchup no pão crocante',     stock:40, active:true },
+    { id:'m17', name:'Cachorro Quente Completo',    cat:'Sandes', price:250, emoji:'🌭', desc:'Salsicha, ovo, queijo, mostarda e ketchup',        stock:30, active:true },
+    { id:'m18', name:'Hambúrguer Simples',          cat:'Sandes', price:200, emoji:'🍔', desc:'Hambúrguer com alface, tomate e molho especial',   stock:30, active:true },
+    { id:'m19', name:'Hambúrguer Completo',         cat:'Sandes', price:300, emoji:'🍔', desc:'Com queijo, bacon, ovo, alface e tomate',          stock:25, active:true },
+    { id:'m20', name:'Hambúrguer à Íris Sabores',   cat:'Sandes', price:450, emoji:'🔥', desc:'Especial da casa — duplo, com molho secreto',      stock:20, active:true },
+    { id:'m21', name:'Tosta de Atum',               cat:'Sandes', price:300, emoji:'🐟', desc:'Atum com queijo e orégãos na tosta quentinha',     stock:25, active:true },
+    { id:'m22', name:'Tosta de Queijo',             cat:'Sandes', price:200, emoji:'🧀', desc:'Queijo derretido na tosta crocante',               stock:30, active:true },
+    { id:'m23', name:'Tosta Mista',                 cat:'Sandes', price:200, emoji:'🥪', desc:'Fiambre e queijo derretido',                       stock:30, active:true },
+    { id:'m24', name:'Tosta Três Ingredientes',     cat:'Sandes', price:300, emoji:'🌟', desc:'Escolha 3 ingredientes da lista',                  stock:25, active:true },
+    { id:'m25', name:'Tosta de Carne',              cat:'Sandes', price:350, emoji:'🥩', desc:'Carne picada temperada na tosta',                  stock:20, active:true },
+    { id:'m26', name:'Prego no Pão',                cat:'Sandes', price:250, emoji:'🥩', desc:'Bife de vaca temperado em pão',                    stock:30, active:true },
+    { id:'m27', name:'Prego no Pão Completo',       cat:'Sandes', price:350, emoji:'🔥', desc:'Prego com queijo, ovo e alface',                   stock:25, active:true },
+    // Refeições
+    { id:'m28', name:'¼ Frango (Arroz, Batata e Salada)',              cat:'Refeições', price:400,  emoji:'🍗', desc:'Quarto de frango grelhado com acompanhamentos',         stock:50, active:true },
+    { id:'m29', name:'½ Frango (Arroz, Batata e Salada)',              cat:'Refeições', price:580,  emoji:'🍗', desc:'Meio frango grelhado com todos os acompanhamentos',     stock:40, active:true },
+    { id:'m30', name:'1 Frango (Arroz, Batata e Salada)',              cat:'Refeições', price:1000, emoji:'🐔', desc:'Frango inteiro grelhado perfeito para partilhar',       stock:20, active:true },
+    { id:'m31', name:'½ Frango à Passarinho com Batata',              cat:'Refeições', price:580,  emoji:'🍗', desc:'Frango à passarinho crocante com batata frita',         stock:30, active:true },
+    { id:'m32', name:'Massa Chinesa de Frango',                        cat:'Refeições', price:550,  emoji:'🍜', desc:'Massa chinesa salteada com frango e legumes',           stock:30, active:true },
+    { id:'m33', name:'Massa Chinesa de Bife',                          cat:'Refeições', price:550,  emoji:'🍜', desc:'Massa chinesa salteada com bife e especiarias',         stock:25, active:true },
+    { id:'m34', name:'Massa Chinesa de Camarão',                       cat:'Refeições', price:750,  emoji:'🍜', desc:'Massa chinesa salteada com camarão fresco',             stock:20, active:true },
+    { id:'m35', name:'Prego no Prato (Arroz, Batata e Salada)',        cat:'Refeições', price:650,  emoji:'🥩', desc:'Bife de vaca temperado com acompanhamentos completos',  stock:25, active:true },
+    { id:'m36', name:'Bife de Frango (Arroz, Batata e Salada)',        cat:'Refeições', price:700,  emoji:'🍗', desc:'Bife de frango grelhado com molho de ervas',            stock:30, active:true },
+    { id:'m37', name:'Bife com Natas (Arroz, Batata e Salada)',        cat:'Refeições', price:800,  emoji:'🥩', desc:'Bife suculento com molho de natas e cogumelos',         stock:20, active:true },
+    { id:'m38', name:'Bife de Frango Grelhado (Arroz, Batata e Salada)',cat:'Refeições',price:600,  emoji:'🍗', desc:'Bife de frango grelhado sem gordura',                  stock:30, active:true },
+    { id:'m39', name:'Picanha (Arroz, Batata e Salada)',               cat:'Refeições', price:1100, emoji:'🥩', desc:'Picanha suculenta grelhada à perfeição',                stock:15, active:true },
+    { id:'m40', name:'Tibone (Arroz, Batata e Salada)',                cat:'Refeições', price:1000, emoji:'🦴', desc:'T-Bone grelhado com ervas aromáticas',                 stock:10, active:true },
+    { id:'m41', name:'Bife com Molho de Alho',                        cat:'Refeições', price:900,  emoji:'🧄', desc:'Bife com molho especial de alho e manteiga',            stock:18, active:true },
+    { id:'m42', name:'Bitoque',                                        cat:'Refeições', price:500,  emoji:'🍳', desc:'Bife com ovo a cavalo, batata e salada',                stock:25, active:true },
+    { id:'m43', name:'Atum conservado',                                cat:'Refeições', price:500,  emoji:'🐟', desc:'Atum em conserva com arroz, batata e salada',           stock:20, active:true },
+    { id:'m44', name:'Arroz de Marisco',                               cat:'Refeições', price:2900, emoji:'🦞', desc:'Arroz cremoso com variedade de mariscos frescos',       stock:8,  active:true },
+    // Mariscos
+    { id:'m45', name:'Camarão Panado (Batata & Salada)',               cat:'Mariscos', price:450,  emoji:'🍤', desc:'Camarão panado crocante com batata frita e salada',     stock:25, active:true },
+    { id:'m46', name:'Camarão Grelhado',                               cat:'Mariscos', price:700,  emoji:'🦐', desc:'Camarão grelhado no molho de manteiga e alho',          stock:20, active:true },
+    { id:'m47', name:'Camarão Panado (Arroz, Batata, Salada)',         cat:'Mariscos', price:550,  emoji:'🍤', desc:'Camarão panado com arroz, batata e salada',             stock:20, active:true },
+    { id:'m48', name:'Camarão Grelhado Q',                             cat:'Mariscos', price:800,  emoji:'🦐', desc:'Camarão tamanho Q grelhado com acompanhamentos',        stock:20, active:true },
+    { id:'m49', name:'Camarão Grelhado TG',                            cat:'Mariscos', price:1300, emoji:'🦐', desc:'Camarão tamanho TG — king size!',                      stock:15, active:true },
+    { id:'m50', name:'Camarão Grelhado Jumbo',                         cat:'Mariscos', price:1550, emoji:'🦐', desc:'Camarão Jumbo — o maior da casa!',                     stock:10, active:true },
+    { id:'m51', name:'Lagostas',                                       cat:'Mariscos', price:2100, emoji:'🦞', desc:'Lagosta fresca grelhada na brasa',                     stock:6,  active:true },
+    { id:'m52', name:'Lulas Grelhadas',                                cat:'Mariscos', price:900,  emoji:'🦑', desc:'Lulas grelhadas com ervas e limão',                    stock:20, active:true },
+    { id:'m53', name:'Lulas Panadas',                                  cat:'Mariscos', price:800,  emoji:'🦑', desc:'Lulas panadas e fritas crocantes',                     stock:20, active:true },
+    { id:'m54', name:'Peixe de Serra em Posta (Arroz, Batata, Salada)',cat:'Mariscos', price:650,  emoji:'🐠', desc:'Posta de peixe de serra grelhada na brasa',            stock:15, active:true },
+    { id:'m55', name:'Peixe Garoupa Médio (Arroz, Batata, Salada)',   cat:'Mariscos', price:850,  emoji:'🐟', desc:'Garoupa fresca grelhada com acompanhamentos',          stock:12, active:true },
+    { id:'m56', name:'Peixe Pende Médio (Arroz, Batata, Salada)',     cat:'Mariscos', price:850,  emoji:'🐟', desc:'Peixe pende grelhado com arroz e salada',             stock:12, active:true },
+    { id:'m57', name:'Peixe Pedra Médio (Arroz, Batata, Salada)',     cat:'Mariscos', price:850,  emoji:'🐠', desc:'Peixe pedra grelhado com batata e salada',            stock:10, active:true },
+    { id:'m58', name:'Peixe Vermelhão Médio',                         cat:'Mariscos', price:850,  emoji:'🐡', desc:'Vermelhão com arroz, batata, salada ou legumes',      stock:10, active:true },
+    { id:'m59', name:'Combo de Carne',                                 cat:'Mariscos', price:2800, emoji:'🥩', desc:'Combinado de carnes grelhadas — para partilhar',       stock:5,  active:true },
+    { id:'m60', name:'Combo de Mariscos',                              cat:'Mariscos', price:3100, emoji:'🦞', desc:'Combinado de mariscos variados — festão!',             stock:5,  active:true },
+    { id:'m61', name:'Arco-íris',                                      cat:'Mariscos', price:3500, emoji:'🌈', desc:'O maior combo da casa — carne + mariscos + peixe!',   stock:3,  active:true },
+    // Pizzas
+    { id:'m62', name:'Pizza Margarida Grande',    cat:'Pizzas', price:500, emoji:'🍕', desc:'Molho de tomate, mozzarella e manjericão',           stock:20, active:true },
+    { id:'m63', name:'Pizza Vegetariana Grande',  cat:'Pizzas', price:650, emoji:'🍕', desc:'Legumes frescos, mozzarella e azeite de ervas',      stock:15, active:true },
+    { id:'m64', name:'Pizza de Atum Grande',      cat:'Pizzas', price:730, emoji:'🍕', desc:'Atum, cebola, azeitonas e mozzarella',              stock:15, active:true },
+    { id:'m65', name:'Pizza de Galinha Grande',   cat:'Pizzas', price:750, emoji:'🍕', desc:'Frango grelhado, pimentos e mozzarella',            stock:15, active:true },
+    { id:'m66', name:'Pizza Mexicana Grande',     cat:'Pizzas', price:770, emoji:'🌶️', desc:'Picante com jalapeño, carne e mozzarella',         stock:12, active:true },
+    { id:'m67', name:'Pizza de Camarão Grande',   cat:'Pizzas', price:800, emoji:'🍕', desc:'Camarão, alho e molho especial da casa',           stock:12, active:true },
+    { id:'m68', name:'Pizza Awena Grande',        cat:'Pizzas', price:800, emoji:'🍕', desc:'Especialidade do chef — surpresa do dia',          stock:10, active:true },
+    { id:'m69', name:'Pizza Bolonhesa Grande',    cat:'Pizzas', price:800, emoji:'🍕', desc:'Carne picada com molho bolonhesa e queijo',        stock:12, active:true },
+    { id:'m70', name:'Pizza de 4 Estações Grande',cat:'Pizzas', price:850, emoji:'🍕', desc:'Quatro sabores numa pizza só',                     stock:10, active:true },
+    { id:'m71', name:'Pizza Margarida Média',     cat:'Pizzas', price:400, emoji:'🍕', desc:'Molho de tomate, mozzarella e manjericão',         stock:25, active:true },
+    { id:'m72', name:'Pizza Vegetariana Média',   cat:'Pizzas', price:500, emoji:'🍕', desc:'Legumes, mozzarella e azeite',                     stock:20, active:true },
+    { id:'m73', name:'Pizza de Atum Média',       cat:'Pizzas', price:580, emoji:'🍕', desc:'Atum, cebola, azeitonas',                          stock:20, active:true },
+    { id:'m74', name:'Pizza de Galinha Média',    cat:'Pizzas', price:600, emoji:'🍕', desc:'Frango grelhado com pimentos',                     stock:20, active:true },
+    { id:'m75', name:'Pizza Mexicana Média',      cat:'Pizzas', price:600, emoji:'🌶️', desc:'Com jalapeño e carne picante',                    stock:18, active:true },
+    { id:'m76', name:'Pizza Awena Média',         cat:'Pizzas', price:600, emoji:'🍕', desc:'Especialidade média do chef',                      stock:15, active:true },
+    { id:'m77', name:'Pizza Bolonhesa Média',     cat:'Pizzas', price:600, emoji:'🍕', desc:'Bolonhesa com queijo',                             stock:18, active:true },
+    { id:'m78', name:'Pizza de 4 Estações Média', cat:'Pizzas', price:700, emoji:'🍕', desc:'4 sabores tamanho médio',                         stock:15, active:true },
+    { id:'m79', name:'Pizza de Camarão Média',    cat:'Pizzas', price:730, emoji:'🍕', desc:'Camarão e molho especial — tamanho médio',        stock:12, active:true },
+    // Sobremesas
+    { id:'m80', name:'Sorvete Mistura',   cat:'Sobremesas', price:250, emoji:'🍨', desc:'Gelado de vários sabores misturados',              stock:30, active:true },
+    { id:'m81', name:'Sorvete Simples',   cat:'Sobremesas', price:100, emoji:'🍦', desc:'Gelado de um sabor',                              stock:40, active:true },
+    { id:'m82', name:'Pudim',             cat:'Sobremesas', price:150, emoji:'🍮', desc:'Pudim caseiro suave e cremoso',                   stock:20, active:true },
+    { id:'m83', name:'Salada de Fruta',   cat:'Sobremesas', price:250, emoji:'🍓', desc:'Frutas frescas da época em calda',                stock:15, active:true },
+    { id:'m84', name:'Mousse Malambe',    cat:'Sobremesas', price:250, emoji:'🍫', desc:'Mousse tradicional de malambe — especialidade!',  stock:12, active:true },
+    { id:'m85', name:'Bolo Gelado',       cat:'Sobremesas', price:250, emoji:'🎂', desc:'Bolo gelado da casa com cobertura especial',      stock:10, active:true },
+    // Bebidas
+    { id:'m86', name:'Redbull',               cat:'Bebidas', price:120, emoji:'🐂', desc:'Bebida energética 250ml',               stock:50,  active:true },
+    { id:'m87', name:'Coca-Cola',             cat:'Bebidas', price:70,  emoji:'🥤', desc:'Refrigerante clássico 330ml',           stock:100, active:true },
+    { id:'m88', name:'Coca-Cola Zero',        cat:'Bebidas', price:70,  emoji:'🥤', desc:'Sem açúcar 330ml',                     stock:60,  active:true },
+    { id:'m89', name:'Fanta Ananas',          cat:'Bebidas', price:70,  emoji:'🍍', desc:'Refrigerante de ananás 330ml',         stock:60,  active:true },
+    { id:'m90', name:'Fanta Laranja',         cat:'Bebidas', price:70,  emoji:'🍊', desc:'Refrigerante de laranja 330ml',        stock:60,  active:true },
+    { id:'m91', name:'Sprite',               cat:'Bebidas', price:70,  emoji:'💚', desc:'Limonada carbonatada 330ml',           stock:60,  active:true },
+    { id:'m92', name:'Sumo de Manga (natural)',cat:'Bebidas', price:250, emoji:'🥭', desc:'Sumo natural de manga fresca',        stock:30,  active:true },
+    { id:'m93', name:'Sumo de Laranja (natural)',cat:'Bebidas',price:180,emoji:'🍊', desc:'Sumo espremido de laranja',          stock:25,  active:true },
+    { id:'m94', name:'Sumo de Ananás (natural)',cat:'Bebidas',price:200, emoji:'🍍', desc:'Sumo natural de ananás',              stock:25,  active:true },
+    { id:'m95', name:'Água Vumba 1.5L',       cat:'Bebidas', price:70,  emoji:'💧', desc:'Água mineral 1.5 litros',             stock:80,  active:true },
+    { id:'m96', name:'Água Vumba 0.5L',       cat:'Bebidas', price:40,  emoji:'💧', desc:'Água mineral 0.5 litros',             stock:80,  active:true },
+    { id:'m97', name:'Café Expresso',         cat:'Bebidas', price:100, emoji:'☕', desc:'Expresso bem intenso',                stock:50,  active:true },
+    { id:'m98', name:'Galão',                 cat:'Bebidas', price:170, emoji:'☕', desc:'Café com leite quente',               stock:40,  active:true },
+    { id:'m99', name:'Frappuccino',           cat:'Bebidas', price:250, emoji:'🧋', desc:'Café gelado cremoso',                 stock:25,  active:true },
+    { id:'m100',name:'Capuchino',             cat:'Bebidas', price:120, emoji:'☕', desc:'Café com leite vaporizado',           stock:40,  active:true },
+    { id:'m101',name:'Chocolate Quente',      cat:'Bebidas', price:170, emoji:'🍫', desc:'Chocolate quente cremoso',            stock:30,  active:true },
+  ];
+}
+
+function defaultStock() {
+  return [
+    { id:'s1',  name:'Frango',           unit:'kg',  qty:45, min:10, max:100 },
+    { id:'s2',  name:'Carne Bovina',     unit:'kg',  qty:28, min:8,  max:60  },
+    { id:'s3',  name:'Camarão',          unit:'kg',  qty:12, min:5,  max:40  },
+    { id:'s4',  name:'Peixe variado',    unit:'kg',  qty:20, min:8,  max:50  },
+    { id:'s5',  name:'Arroz',            unit:'kg',  qty:80, min:20, max:150 },
+    { id:'s6',  name:'Batata',           unit:'kg',  qty:60, min:15, max:120 },
+    { id:'s7',  name:'Farinha de Trigo', unit:'kg',  qty:35, min:10, max:80  },
+    { id:'s8',  name:'Queijo Mozzarella',unit:'kg',  qty:8,  min:3,  max:20  },
+    { id:'s9',  name:'Óleo de cozinha',  unit:'L',   qty:30, min:10, max:60  },
+    { id:'s10', name:'Refrigerantes',    unit:'uni', qty:150,min:40, max:300 },
+    { id:'s11', name:'Ovos',             unit:'uni', qty:120,min:30, max:240 },
+    { id:'s12', name:'Legumes frescos',  unit:'kg',  qty:25, min:8,  max:50  },
+    { id:'s13', name:'Manteiga',         unit:'kg',  qty:5,  min:2,  max:15  },
+    { id:'s14', name:'Lulas',            unit:'kg',  qty:8,  min:3,  max:25  },
+    { id:'s15', name:'Lagostas',         unit:'uni', qty:6,  min:2,  max:20  },
+  ];
+}
+
+/* ═══════════════════════════════════════════════════════════
+   APP STATE
+═══════════════════════════════════════════════════════════ */
+let currentUser = null;
+let cart = [];
+let isDelivery = true;
+let selectedPayMethod = 'mpesa';
+let ratingOrderId = null;
+let currentRating = 0;
+let editingItemId = null;
+let currentCashType = 'entrada';
+let activeCat = 'Todos';
+let currentAdminSec = 'dashboard';
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+seed();
+initParticles();
+updateNavUI();
+buildMenu();
+buildWeekly();
+refreshOrdersPage();
+updateHeroStats();
+
+/* ═══════════════════════════════════════════════════════════
+   PARTICLES
+═══════════════════════════════════════════════════════════ */
+function initParticles() {
+  const wrap = $('hero-particles');
+  if (!wrap) return;
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `left:${Math.random()*100}%;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s;opacity:.5`;
+    wrap.appendChild(p);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════ */
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = $('page-' + id);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  const pages = ['home','menu','weekly','orders'];
+  const idx = pages.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('.nav-link')[idx]?.classList.add('active');
+  if (id === 'admin') {
+    if (!currentUser || !['admin','worker','delivery'].includes(currentUser.role)) { nav('login'); return; }
+    renderAdminSection(currentAdminSec);
+  }
+  window.scrollTo(0, 0);
+  closeSidebar();
+}
+
+function toggleMobileMenu() {
+  $('admin-sidebar').classList.toggle('mobile-open');
+}
+function closeSidebar() {
+  $('admin-sidebar').classList.remove('mobile-open');
+}
+
+function updateNavUI() {
+  const u = currentUser;
+  const avatar = $('user-avatar');
+  const label = $('user-chip-label');
+  if (u) {
+    avatar.textContent = u.name[0].toUpperCase();
+    label.textContent = u.name.split(' ')[0];
+    avatar.style.background = 'var(--success)';
+  } else {
+    avatar.textContent = '?';
+    label.textContent = 'Entrar';
+    avatar.style.background = 'var(--orange)';
+  }
+  // show admin-only sidebar items
+  document.querySelectorAll('.admin-only').forEach(el => {
+    el.style.display = (u && u.role === 'admin') ? 'flex' : 'none';
+  });
+  // inject admin nav link
+  const nc = $('nav-center');
+  const existing = nc.querySelector('.admin-nav-link');
+  if (u && !existing) {
+    const b = document.createElement('button');
+    b.className = 'nav-link admin-nav-link';
+    b.textContent = u.role === 'admin' ? 'Admin' : 'Painel';
+    b.onclick = () => nav('admin');
+    nc.appendChild(b);
+  } else if (!u && existing) {
+    existing.remove();
+  }
+}
+
+function userChipClick() {
+  if (currentUser) nav('admin');
+  else nav('login');
+}
+
+function updateHeroStats() {
+  const orders = DB.get('orders') || [];
+  $('hs-orders').textContent = orders.length;
+  $('hs-items').textContent = (DB.get('menu') || []).filter(m => m.active).length + '+';
+  const rated = orders.filter(o => o.rating);
+  const avg = rated.length ? (rated.reduce((s, o) => s + o.rating, 0) / rated.length).toFixed(1) : '5.0';
+  $('hs-rating').textContent = '★ ' + avg;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LOGIN / LOGOUT
+═══════════════════════════════════════════════════════════ */
+function doLogin() {
+  const email = $('login-email').value.trim();
+  const pass = $('login-pass').value;
+  const all = [...(DB.get('users') || []), ...(DB.get('workers') || [])];
+  const found = all.find(u => u.email === email && u.pass === pass);
+  if (!found) { toast('Email ou password incorrectos', 'error'); return; }
+  currentUser = found;
+  updateNavUI();
+  $('sb-role').textContent = found.role === 'admin' ? 'Administrador' : (found.type === 'delivery' ? 'Entregador' : 'Funcionário');
+  nav('admin');
+  toast('Bem-vindo, ' + found.name.split(' ')[0] + '! 👋', 'success');
+}
+function doLogout() {
+  currentUser = null;
+  updateNavUI();
+  nav('home');
+  const al = $('nav-center').querySelector('.admin-nav-link');
+  if (al) al.remove();
+  toast('Sessão terminada', 'info');
+}
+function togglePw() {
+  const inp = $('login-pass');
+  const eye = $('pw-eye');
+  if (inp.type === 'password') { inp.type = 'text'; eye.className = 'fas fa-eye-slash'; }
+  else { inp.type = 'password'; eye.className = 'fas fa-eye'; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MENU
+═══════════════════════════════════════════════════════════ */
+function buildMenu() {
+  const menu = (DB.get('menu') || []).filter(m => m.active);
+  const cats = ['Todos', ...new Set(menu.map(m => m.cat))];
+
+  // tabs
+  const tabsEl = $('cat-tabs');
+  if (tabsEl) {
+    tabsEl.innerHTML = cats.map(c => {
+      const count = c === 'Todos' ? menu.length : menu.filter(m => m.cat === c).length;
+      return `<div class="cat-tab ${c === activeCat ? 'active' : ''}" onclick="filterCat('${c}')">${catIcon(c)} ${c} <small style="opacity:.6">(${count})</small></div>`;
+    }).join('');
+  }
+
+  const grid = $('menu-grid');
+  if (!grid) return;
+  const filtered = activeCat === 'Todos' ? menu : menu.filter(m => m.cat === activeCat);
+
+  grid.innerHTML = filtered.map(item => {
+    const oos = item.stock <= 0;
+    return `
+      <div class="menu-item ${oos ? 'out-of-stock' : ''}">
+        <div class="menu-item-cat"><span class="badge badge-orange">${item.cat}</span></div>
+        ${item.stock > 0 && item.stock <= 10 ? `<div class="stock-chip">⚠️ ${item.stock} restantes</div>` : ''}
+        <div class="menu-item-emoji">${item.emoji || '🍽️'}</div>
+        <div class="menu-item-body">
+          <div class="menu-item-name">${item.name}</div>
+          <div class="menu-item-desc">${item.desc || ''}</div>
+          <div class="menu-item-footer">
+            <div class="menu-price">${fmtMT(item.price)}</div>
+            <button class="add-to-cart" onclick="addToCart('${item.id}')" ${oos ? 'disabled' : ''} title="Adicionar ao carrinho">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        ${oos ? '<div class="oos-overlay">Esgotado</div>' : ''}
+      </div>`;
+  }).join('');
+}
+
+function catIcon(c) {
+  const map = { Todos:'🍽️', Entradas:'🥟', Saladas:'🥗', Sandes:'🥪', Refeições:'🍗', Mariscos:'🦐', Pizzas:'🍕', Sobremesas:'🍮', Bebidas:'☕' };
+  return map[c] || '🍽️';
+}
+
+function filterCat(c) { activeCat = c; buildMenu(); }
+
+/* ═══════════════════════════════════════════════════════════
+   CART
+═══════════════════════════════════════════════════════════ */
+function addToCart(id) {
+  const menu = DB.get('menu') || [];
+  const item = menu.find(m => m.id === id);
+  if (!item) return;
+  const ex = cart.find(c => c.id === id);
+  if (ex) ex.qty++;
+  else cart.push({ ...item, qty: 1, note: '' });
+  updateCartUI();
+  toast(`${item.emoji} ${item.name} adicionado!`, 'success');
+  openCart();
+}
+
+function removeFromCart(i) { cart.splice(i, 1); updateCartUI(); }
+function changeQty(i, d) {
+  cart[i].qty += d;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  updateCartUI();
+}
+
+function openCart() {
+  $('drawer-overlay').classList.add('open');
+  $('cart-drawer').classList.add('open');
+  updateCartUI();
+}
+function closeCart() {
+  $('drawer-overlay').classList.remove('open');
+  $('cart-drawer').classList.remove('open');
+}
+
+function setDelMode(v) {
+  isDelivery = v;
+  $('del-opt-1').classList.toggle('sel', v);
+  $('del-opt-2').classList.toggle('sel', !v);
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+  $('cart-badge').textContent = count;
+  $('cart-total-lbl').textContent = fmtMT(total);
+
+  const body = $('cart-body');
+  if (!body) return;
+  if (cart.length === 0) {
+    body.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-cart"></i><span>Carrinho vazio</span><button class="btn btn-outline" onclick="closeCart();nav('menu')">Ver menu</button></div>`;
+    return;
+  }
+  body.innerHTML = cart.map((item, i) => `
+    <div class="cart-line">
+      <div class="cart-line-emoji">${item.emoji || '🍽️'}</div>
+      <div class="cart-line-info">
+        <div class="cart-line-name">${item.name}</div>
+        <div class="cart-line-price">${fmtMT(item.price * item.qty)}</div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+          <span style="font-size:14px;font-weight:600">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+        </div>
+        <input class="cart-note-inp" placeholder="Nota para este item..." value="${item.note || ''}" oninput="cart[${i}].note=this.value">
+      </div>
+      <button class="remove-line" onclick="removeFromCart(${i})"><i class="fas fa-trash"></i></button>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CHECKOUT
+═══════════════════════════════════════════════════════════ */
+function goToCheckout() {
+  if (cart.length === 0) { toast('Carrinho vazio!', 'error'); return; }
+  closeCart();
+  nav('checkout');
+  coNext(1);
+}
+
+function coNext(step) {
+  [1,2,3].forEach(s => {
+    $('cp-' + s).classList.toggle('active', s === step);
+    const si = $('si-' + s);
+    si.className = 'step-item' + (s < step ? ' done' : s === step ? ' active' : '');
+  });
+  if (step === 3) buildOrderSummary();
+}
+
+function selectPay(el) {
+  document.querySelectorAll('#pay-methods .del-opt').forEach(e => e.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedPayMethod = el.dataset.pay;
+}
+
+function buildOrderSummary() {
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  $('order-summary').innerHTML = `
+    <h3 style="font-size:18px;margin-bottom:14px">Resumo do Pedido</h3>
+    ${cart.map(i => `
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);gap:10px">
+        <span style="font-size:13px">${i.emoji} ${i.name} <span style="color:var(--muted)">x${i.qty}</span>${i.note ? `<em style="color:var(--muted);display:block;font-size:11px">"${i.note}"</em>` : ''}</span>
+        <span style="font-weight:700;color:var(--orange);white-space:nowrap">${fmtMT(i.price * i.qty)}</span>
+      </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;padding-top:12px;font-size:18px;font-weight:700">
+      <span>Total</span><span style="color:var(--orange)">${fmtMT(total)}</span>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px">${isDelivery ? '🛵 Entrega ao domicílio' : '🏃 Retirar no restaurante'}</div>
+  `;
+}
+
+function requestLocation() {
+  $('map-status').textContent = 'A obter localização...';
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const { latitude, longitude } = pos.coords;
+      $('map-status').textContent = `✅ Localização obtida (${latitude.toFixed(4)}, ${longitude.toFixed(4)})`;
+      $('co-address').value = $('co-address').value || `Lat: ${latitude.toFixed(5)}, Lon: ${longitude.toFixed(5)}`;
+      // store for maps link
+      window._userLat = latitude;
+      window._userLon = longitude;
+      $('tracking-maps-link').href = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    }, () => {
+      $('map-status').textContent = '⚠️ Não foi possível obter localização. Preencha o endereço manualmente.';
+    });
+  } else {
+    $('map-status').textContent = '⚠️ GPS não disponível. Preencha o endereço manualmente.';
+  }
+}
+
+function placeOrder() {
+  const name = $('co-name').value.trim();
+  const phone = $('co-phone').value.trim();
+  const address = $('co-address').value.trim();
+  if (!name || !phone) { toast('Preencha nome e telemóvel!', 'error'); coNext(1); return; }
+  if (isDelivery && !address) { toast('Preencha o endereço de entrega!', 'error'); coNext(2); return; }
+
+  const order = {
+    id: oid(),
+    customer: {
+      name, phone,
+      email: $('co-email').value,
+      address: address || 'Retirar no local',
+      ref: $('co-ref').value,
+      neighborhood: $('co-neighborhood').value,
+      lat: window._userLat || null,
+      lon: window._userLon || null,
+    },
+    items: JSON.parse(JSON.stringify(cart)),
+    note: $('co-note').value,
+    payment: selectedPayMethod,
+    delivery: isDelivery,
+    total: cart.reduce((s, c) => s + c.price * c.qty, 0),
+    status: 'pending',
+    date: today(),
+    time: nowTime(),
+    rating: null,
+    ratingComment: '',
+    steps: { restaurant: false, delivery: false, client: false },
+    stepTimes: {},
+  };
+
+  // Save order
+  DB.push('orders', order);
+
+  // Deduct stock from menu
+  const menu = DB.get('menu') || [];
+  cart.forEach(ci => {
+    const m = menu.find(x => x.id === ci.id);
+    if (m) m.stock = Math.max(0, m.stock - ci.qty);
+  });
+  DB.set('menu', menu);
+
+  // Cash movement
+  DB.push('cash_movements', {
+    id: uid(), type: 'entrada', cat: 'Venda',
+    desc: `Pedido ${order.id} — ${name}`,
+    amount: order.total, date: today(), time: nowTime()
+  });
+
+  // WhatsApp notification
+  const waMsg = encodeURIComponent(
+    `🍽️ *NOVO PEDIDO — Íris Sabores*\n\n` +
+    `📋 *${order.id}*\n👤 ${name}\n📞 ${phone}\n` +
+    `💳 ${payLabel(order.payment)}\n` +
+    `${isDelivery ? `📍 ${address}` : '🏃 Retirar no local'}\n\n` +
+    `*Itens:*\n${cart.map(i => `• ${i.emoji} ${i.name} x${i.qty} — ${fmtMT(i.price * i.qty)}`).join('\n')}\n\n` +
+    `💰 *Total: ${fmtMT(order.total)}*\n\n` +
+    (order.note ? `📝 Nota: ${order.note}` : '')
+  );
+  window.open(`https://wa.me/258878743430?text=${waMsg}`, '_blank');
+
+  // Reset cart
+  cart = [];
+  updateCartUI();
+  updateHeroStats();
+  buildMenu();
+
+  nav('orders');
+  refreshOrdersPage();
+  toast(`✅ Pedido ${order.id} realizado! A notificar o restaurante...`, 'success');
+}
+
+function payLabel(p) {
+  const m = { mpesa: 'M-Pesa', emola: 'e-Mola', cash: 'Dinheiro', ponto24: 'Ponto 24' };
+  return m[p] || p;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ORDERS PAGE (CLIENT)
+═══════════════════════════════════════════════════════════ */
+function refreshOrdersPage() {
+  const el = $('orders-list');
+  if (!el) return;
+  const orders = (DB.get('orders') || []).slice().reverse();
+  if (!orders.length) {
+    el.innerHTML = `<div style="text-align:center;padding:60px;color:var(--muted)"><i class="fas fa-box-open" style="font-size:48px;display:block;margin-bottom:14px;opacity:.3"></i>Ainda não fez nenhum pedido.<br><button class="btn btn-primary" style="margin-top:16px" onclick="nav('menu')">Fazer Pedido</button></div>`;
+    return;
+  }
+  el.innerHTML = orders.map(o => {
+    const canConfirm = o.steps.delivery && !o.steps.client;
+    const canRate = o.status === 'client_confirmed' && !o.rating;
+    return `
+      <div class="order-card">
+        <div class="order-head">
+          <div>
+            <div class="order-id">${o.id}</div>
+            <div class="order-meta">${dateStr(o.date)} · ${o.time} · ${o.delivery ? '🛵 Entrega' : '🏃 Retirar'} · ${payLabel(o.payment)}</div>
+          </div>
+          <span class="badge ${statusBadge(o.status)}">${statusLabel(o.status)}</span>
+        </div>
+        <div class="order-items">${o.items.map(i => `${i.emoji} ${i.name} x${i.qty}`).join(' &nbsp;·&nbsp; ')}</div>
+        ${o.note ? `<div style="font-size:12px;color:var(--muted);margin-bottom:10px"><i class="fas fa-sticky-note"></i> ${o.note}</div>` : ''}
+        <div class="order-foot">
+          <div class="order-total">${fmtMT(o.total)}</div>
+          <div class="order-actions">
+            <button class="btn btn-ghost btn-sm" onclick="openTracking('${o.id}')"><i class="fas fa-map-marker-alt"></i> Rastrear</button>
+            ${canConfirm ? `<button class="btn btn-success btn-sm" onclick="clientConfirm('${o.id}')"><i class="fas fa-check"></i> Confirmar Recebimento</button>` : ''}
+            ${canRate ? `<button class="btn btn-amber btn-sm" onclick="openRating('${o.id}')"><i class="fas fa-star"></i> Avaliar</button>` : ''}
+          </div>
+        </div>
+        ${o.rating ? `<div style="margin-top:8px;font-size:14px;color:var(--amber)">${'★'.repeat(o.rating)}${'☆'.repeat(5-o.rating)} <span style="color:var(--muted);font-size:12px">${o.ratingComment || ''}</span></div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function statusLabel(s) {
+  const m = { pending:'⏳ Aguarda confirmação', restaurant_confirmed:'🍳 Em preparação', delivery_confirmed:'🛵 A caminho', client_confirmed:'✅ Entregue', cancelled:'❌ Cancelado' };
+  return m[s] || s;
+}
+function statusBadge(s) {
+  const m = { pending:'badge-amber', restaurant_confirmed:'badge-blue', delivery_confirmed:'badge-orange', client_confirmed:'badge-green', cancelled:'badge-red' };
+  return m[s] || 'badge-grey';
+}
+
+function clientConfirm(id) {
+  const orders = DB.get('orders') || [];
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+  o.steps.client = true;
+  o.status = 'client_confirmed';
+  o.stepTimes.client = nowTime();
+  DB.set('orders', orders);
+  refreshOrdersPage();
+  toast('Obrigado por confirmar! 🙏 Aproveite a refeição!', 'success');
+  setTimeout(() => openRating(id), 800);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TRACKING MODAL
+═══════════════════════════════════════════════════════════ */
+function openTracking(id) {
+  const orders = DB.get('orders') || [];
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+
+  const stepsData = [
+    { key: 'restaurant', icon: 'fa-store', label: '✅ Restaurante confirmou', desc: 'O pedido foi aceite e está a ser preparado com carinho.' },
+    { key: 'delivery', icon: 'fa-motorcycle', label: '🛵 Entregador a caminho', desc: 'O entregador recolheu o pedido e está a caminho da sua morada.' },
+    { key: 'client', icon: 'fa-check-circle', label: '🙏 Entregue com sucesso', desc: 'O cliente confirmou o recebimento. Obrigado!' },
+  ];
+
+  const mapsUrl = o.customer.lat
+    ? `https://www.google.com/maps?q=${o.customer.lat},${o.customer.lon}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(o.customer.address + ' Beira Moçambique')}`;
+
+  $('tracking-maps-link').href = mapsUrl;
+
+  $('m-tracking-body').innerHTML = `
+    <div style="background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px">
+      <div style="font-weight:700;margin-bottom:4px">${o.id} · <span style="color:var(--orange)">${fmtMT(o.total)}</span></div>
+      <div style="color:var(--muted)">${o.customer.name} · ${o.customer.phone}</div>
+      <div style="color:var(--muted);margin-top:4px"><i class="fas fa-map-marker-alt" style="color:var(--orange)"></i> ${o.customer.address}</div>
+    </div>
+    <div class="track-steps">
+      ${stepsData.map((s, si) => {
+        const done = o.steps[s.key];
+        const active = !done && si > 0 ? o.steps[stepsData[si-1].key] && !o.steps[s.key] : si === 0 && !done;
+        return `
+          <div class="track-step ${done ? 'done' : active ? 'active' : ''}">
+            <div class="track-icon"><i class="fas ${s.icon}"></i></div>
+            <div class="track-content">
+              <h4>${s.label}</h4>
+              <p>${done ? '✓ Concluído' + (o.stepTimes[s.key] ? ' às ' + o.stepTimes[s.key] : '') : s.desc}</p>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>
+    ${o.delivery ? `<div style="margin-top:14px;background:rgba(41,128,185,.1);border:1px solid rgba(41,128,185,.3);border-radius:var(--r);padding:12px;font-size:12px;color:var(--info)"><i class="fas fa-map"></i> Clique "Ver no Maps" para abrir a localização no Google Maps</div>` : ''}
+  `;
+  openModal('m-tracking');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RATING
+═══════════════════════════════════════════════════════════ */
+function openRating(id) {
+  ratingOrderId = id;
+  currentRating = 0;
+  document.querySelectorAll('.r-star').forEach(s => s.classList.remove('lit'));
+  $('rating-comment').value = '';
+  $('rating-label').textContent = 'Seleccione uma classificação';
+  openModal('m-rating');
+
+  document.querySelectorAll('.r-star').forEach(star => {
+    star.onmouseover = () => {
+      const v = parseInt(star.dataset.v);
+      document.querySelectorAll('.r-star').forEach(s => s.classList.toggle('lit', parseInt(s.dataset.v) <= v));
+    };
+    star.onmouseleave = () => {
+      document.querySelectorAll('.r-star').forEach(s => s.classList.toggle('lit', parseInt(s.dataset.v) <= currentRating));
+    };
+    star.onclick = () => {
+      currentRating = parseInt(star.dataset.v);
+      const labels = ['', 'Mau 😕', 'Razoável 😐', 'Bom 🙂', 'Muito bom 😊', 'Excelente! 🤩'];
+      $('rating-label').textContent = labels[currentRating];
+    };
+  });
+}
+
+function submitRating() {
+  if (!currentRating) { toast('Seleccione uma classificação', 'error'); return; }
+  const orders = DB.get('orders') || [];
+  const o = orders.find(x => x.id === ratingOrderId);
+  if (o) { o.rating = currentRating; o.ratingComment = $('rating-comment').value; }
+  DB.set('orders', orders);
+  closeModal('m-rating');
+  refreshOrdersPage();
+  updateHeroStats();
+  toast('Obrigado pela avaliação! ' + '⭐'.repeat(currentRating), 'success');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WEEKLY MENU
+═══════════════════════════════════════════════════════════ */
+function buildWeekly() {
+  const days = [
+    { day: 'Segunda-feira', icon: '🥩', color: '#e85d04',
+      dishes: [{ name: 'Cabrito Estufado', price: 400 }, { name: 'Bife Acebolado', price: 400 }],
+      note: 'Inclui arroz de legumes, saladas e sopa de entrada' },
+    { day: 'Terça-feira', icon: '🐟', color: '#2980b9',
+      dishes: [{ name: 'Peixe de Serra', price: 400 }, { name: 'Postas de Peixe Pedra', price: 400 }],
+      note: 'Inclui arroz de legumes, saladas e sopa de entrada' },
+    { day: 'Quarta-feira', icon: '🥦', color: '#27ae60',
+      dishes: [{ name: 'Verduras', price: 400 }, { name: 'Peixe e Feijoada', price: 400 }],
+      note: 'Inclui arroz branco' },
+    { day: 'Quinta-feira', icon: '🦆', color: '#8e44ad',
+      dishes: [{ name: 'Carne de Pato', price: 400 }, { name: 'Frango à Zambéziana', price: 400 }],
+      note: 'Inclui arroz de legumes, saladas e sopa de entrada' },
+    { day: 'Sexta-feira', icon: '🦑', color: '#e67e22',
+      dishes: [{ name: 'Lulas', price: 400 }, { name: 'Camarão Grelhado', price: 400 }],
+      note: 'Inclui arroz de legumes, saladas e sopa de entrada' },
+  ];
+
+  const el = $('weekly-grid');
+  if (!el) return;
+  el.innerHTML = days.map(d => `
+    <div class="weekly-card">
+      <div style="font-size:40px;margin-bottom:10px">${d.icon}</div>
+      <div class="weekly-day">${d.day}</div>
+      <div class="weekly-title">Menu do dia</div>
+      ${d.dishes.map((dish, i) => `
+        <div class="weekly-dish">
+          <span><span style="color:var(--muted);margin-right:4px">${i+1}.</span>${dish.name}</span>
+          <span style="font-weight:700;color:var(--orange)">${fmtMT(dish.price)}</span>
+        </div>`).join('')}
+      <div class="weekly-note"><i class="fas fa-info-circle"></i> ${d.note}</div>
+      <button class="btn btn-outline w-full btn-sm" style="margin-top:14px" onclick="nav('menu')">Encomendar →</button>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ADMIN SECTIONS
+═══════════════════════════════════════════════════════════ */
+function aSection(id) {
+  currentAdminSec = id;
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  const sec = $('as-' + id);
+  if (sec) {
+    sec.classList.add('active');
+    renderAdminSection(id);
+  }
+  document.querySelectorAll('.sidebar-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) b.classList.add('active');
+  });
+}
+
+function renderAdminSection(id) {
+  const sec = $('as-' + id);
+  if (!sec) return;
+  const renderers = {
+    'dashboard': renderDashboard,
+    'orders-admin': renderOrdersAdmin,
+    'cash': renderCash,
+    'stock': renderStock,
+    'menu-admin': renderMenuAdmin,
+    'workers': renderWorkers,
+    'accounts': renderAccounts,
+    'reports': renderReports,
+  };
+  if (renderers[id]) { sec.innerHTML = renderers[id](); }
+  // highlight sidebar btn
+  document.querySelectorAll('.sidebar-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === sectionName(id));
+  });
+}
+
+function sectionName(id) {
+  const m = { dashboard:'Dashboard', 'orders-admin':'Pedidos', cash:'Caixa', stock:'Stock', 'menu-admin':'Menu', workers:'Funcionários', accounts:'Contas', reports:'Relatórios' };
+  return m[id] || '';
+}
+
+/* --- DASHBOARD --- */
+function renderDashboard() {
+  const orders = DB.get('orders') || [];
+  const tod = orders.filter(o => o.date === today());
+  const todR = tod.reduce((s, o) => s + o.total, 0);
+  const wkR = orders.filter(o => isThisWeek(o.date)).reduce((s, o) => s + o.total, 0);
+  const moR = orders.filter(o => isThisMonth(o.date)).reduce((s, o) => s + o.total, 0);
+  const rated = orders.filter(o => o.rating);
+  const avgR = rated.length ? (rated.reduce((s, o) => s + o.rating, 0) / rated.length).toFixed(1) : '–';
+
+  const days7 = [];
+  for (let i = 6; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); days7.push(d.toISOString().split('T')[0]); }
+  const dayRevs = days7.map(d => orders.filter(o => o.date === d).reduce((s, o) => s + o.total, 0));
+  const maxRev = Math.max(...dayRevs, 1);
+
+  const stock = DB.get('stock') || [];
+  const lowStock = stock.filter(s => s.qty <= s.min);
+
+  return `
+    <div class="section-head">
+      <div><h2>Dashboard <span>Geral</span></h2><p class="text-muted text-sm" style="margin-top:4px">${new Date().toLocaleDateString('pt',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</p></div>
+      <button class="btn btn-primary btn-sm" onclick="aSection('reports')"><i class="fas fa-download"></i> Exportar</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-glow" style="background:var(--orange)"></div><div class="stat-label">Receita Hoje</div><div class="stat-val text-orange">${fmtMT(todR)}</div><div class="stat-sub">${tod.length} pedidos</div></div>
+      <div class="stat-card"><div class="stat-glow" style="background:var(--success)"></div><div class="stat-label">Receita Semana</div><div class="stat-val text-success">${fmtMT(wkR)}</div><div class="stat-sub">Esta semana</div></div>
+      <div class="stat-card"><div class="stat-glow" style="background:var(--info)"></div><div class="stat-label">Receita Mês</div><div class="stat-val text-info">${fmtMT(moR)}</div><div class="stat-sub">Este mês</div></div>
+      <div class="stat-card"><div class="stat-glow" style="background:var(--amber)"></div><div class="stat-label">Avaliação</div><div class="stat-val text-amber">${avgR} ⭐</div><div class="stat-sub">${rated.length} avaliações</div></div>
+      <div class="stat-card"><div class="stat-glow" style="background:var(--orange)"></div><div class="stat-label">Total Pedidos</div><div class="stat-val">${orders.length}</div><div class="stat-sub">Desde o início</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="card">
+        <div style="margin-bottom:14px;font-weight:700;font-size:16px">Receita — Últimos 7 Dias</div>
+        <div class="bar-chart">
+          ${dayRevs.map((rev, i) => {
+            const pct = Math.max(3, (rev / maxRev) * 100);
+            const label = days7[i].slice(5).replace('-', '/');
+            return `<div class="bc-col"><div class="bc-val">${rev > 0 ? Math.round(rev/1000)+'k' : ''}</div><div class="bc-bar" style="height:${pct}%"></div><div class="bc-label">${label}</div></div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="card">
+        <div style="margin-bottom:14px;font-weight:700;font-size:16px">Estado dos Pedidos</div>
+        ${[['pending','Pendentes','amber'],['restaurant_confirmed','Em prep.','blue'],['delivery_confirmed','A caminho','orange'],['client_confirmed','Entregues','green']].map(([s,l,c]) => {
+          const n = orders.filter(o => o.status === s).length;
+          return `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px"><span>${l}</span><span class="badge badge-${c}">${n}</span></div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card">
+        <div style="margin-bottom:14px;font-weight:700;font-size:16px">Pedidos Recentes</div>
+        ${orders.slice(-6).reverse().map(o => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;gap:8px">
+            <span style="font-weight:600">${o.id}</span>
+            <span class="truncate text-muted" style="flex:1;min-width:0">${o.customer.name}</span>
+            <span style="color:var(--orange);white-space:nowrap">${fmtMT(o.total)}</span>
+            <span class="badge ${statusBadge(o.status)}" style="padding:2px 7px">${o.status==='pending'?'⏳':o.status==='client_confirmed'?'✅':'🔄'}</span>
+          </div>`).join('')}
+      </div>
+      <div class="card">
+        <div style="margin-bottom:14px;font-weight:700;font-size:16px">⚠️ Stock Crítico</div>
+        ${lowStock.length === 0 ? '<p class="text-muted text-sm">Tudo em ordem! ✅</p>' :
+          lowStock.map(s => `
+            <div style="display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border)">
+              <span>${s.name}</span>
+              <span class="badge badge-red">${s.qty} ${s.unit}</span>
+            </div>`).join('')}
+        <button class="btn btn-outline btn-sm w-full" style="margin-top:12px" onclick="aSection('stock')">Gerir Stock</button>
+      </div>
+    </div>`;
+}
+
+/* --- ORDERS ADMIN --- */
+function renderOrdersAdmin() {
+  const orders = (DB.get('orders') || []).slice().reverse();
+  const isAdmin = currentUser?.role === 'admin';
+  const isDeliveryUser = currentUser?.type === 'delivery';
+  const isWorker = currentUser?.type === 'worker' || currentUser?.role === 'worker';
+
+  return `
+    <div class="section-head">
+      <h2>Gestão de <span>Pedidos</span></h2>
+      <div class="flex gap-2">
+        <select class="form-control" style="width:auto;padding:8px 12px" id="order-filter" onchange="filterOrdersRender()">
+          <option value="">Todos</option><option value="pending">Pendentes</option>
+          <option value="restaurant_confirmed">Em prep.</option><option value="delivery_confirmed">A caminho</option>
+          <option value="client_confirmed">Entregues</option><option value="cancelled">Cancelados</option>
+        </select>
+      </div>
+    </div>
+    <div class="table-wrap" id="orders-admin-table">
+      <table class="data-tbl">
+        <thead><tr><th>Pedido</th><th>Cliente</th><th>Itens</th><th>Total</th><th>Estado</th><th>Acções</th></tr></thead>
+        <tbody>
+          ${orders.map(o => `
+            <tr>
+              <td><div style="font-weight:700">${o.id}</div><div class="text-muted text-xs">${o.date} · ${o.time}</div></td>
+              <td><div style="font-weight:600">${o.customer.name}</div><div class="text-muted text-xs">${o.customer.phone}</div></td>
+              <td style="max-width:180px;font-size:12px">${o.items.map(i => `${i.emoji} ${i.name} x${i.qty}`).join(', ')}</td>
+              <td style="font-weight:700;color:var(--orange)">${fmtMT(o.total)}</td>
+              <td><span class="badge ${statusBadge(o.status)}">${statusLabel(o.status)}</span></td>
+              <td>
+                <div class="flex flex-col gap-1">
+                  ${!o.steps.restaurant && (isAdmin || isWorker) ? `<button class="btn btn-success btn-xs" onclick="confirmStep('${o.id}','restaurant')">✅ Confirmar</button>` : ''}
+                  ${o.steps.restaurant && !o.steps.delivery && (isAdmin || isDeliveryUser) ? `<button class="btn btn-info btn-xs" onclick="confirmStep('${o.id}','delivery')">🛵 Entregue</button>` : ''}
+                  <button class="btn btn-ghost btn-xs" onclick="openTracking('${o.id}')">📍 Rastrear</button>
+                  ${isAdmin && o.status !== 'cancelled' ? `<button class="btn btn-danger btn-xs" onclick="cancelOrder('${o.id}')">❌ Cancelar</button>` : ''}
+                </div>
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function filterOrdersRender() {
+  aSection('orders-admin');
+}
+
+function confirmStep(id, step) {
+  const orders = DB.get('orders') || [];
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+  o.steps[step] = true;
+  o.stepTimes[step] = nowTime();
+  const nextStatus = { restaurant: 'restaurant_confirmed', delivery: 'delivery_confirmed' };
+  o.status = nextStatus[step];
+  DB.set('orders', orders);
+  aSection('orders-admin');
+  refreshOrdersPage();
+  toast(`Passo confirmado: ${step === 'restaurant' ? 'Restaurante' : 'Entrega'}`, 'success');
+}
+
+function cancelOrder(id) {
+  if (!confirm('Cancelar este pedido?')) return;
+  const orders = DB.get('orders') || [];
+  const o = orders.find(x => x.id === id);
+  if (o) { o.status = 'cancelled'; }
+  DB.set('orders', orders);
+  aSection('orders-admin');
+  toast('Pedido cancelado', 'info');
+}
+
+/* --- CASH --- */
+function renderCash() {
+  const movs = DB.get('cash_movements') || [];
+  const todM = movs.filter(m => m.date === today());
+  const totIn = todM.filter(m => m.type === 'entrada').reduce((s, m) => s + m.amount, 0);
+  const totOut = todM.filter(m => m.type === 'saida').reduce((s, m) => s + m.amount, 0);
+
+  return `
+    <div class="section-head">
+      <h2>Movimentação de <span>Caixa</span></h2>
+      <div class="flex gap-2">
+        <button class="btn btn-success btn-sm" onclick="openCashModal('entrada')"><i class="fas fa-plus"></i> Entrada</button>
+        <button class="btn btn-danger btn-sm" onclick="openCashModal('saida')"><i class="fas fa-minus"></i> Saída</button>
+        <button class="btn btn-primary btn-sm" onclick="dailyClosing()"><i class="fas fa-print"></i> Fecho Diário</button>
+      </div>
+    </div>
+    <div class="stats-row" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-card"><div class="stat-glow" style="background:var(--success)"></div><div class="stat-label">Entradas Hoje</div><div class="stat-val text-success">${fmtMT(totIn)}</div></div>
+      <div class="stat-card"><div class="stat-glow" style="background:var(--danger)"></div><div class="stat-label">Saídas Hoje</div><div class="stat-val text-danger">${fmtMT(totOut)}</div></div>
+      <div class="stat-card"><div class="stat-glow" style="background:var(--orange)"></div><div class="stat-label">Saldo Hoje</div><div class="stat-val text-orange">${fmtMT(totIn - totOut)}</div></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-tbl">
+        <thead><tr><th>Tipo</th><th>Categoria</th><th>Descrição</th><th>Valor</th><th>Data</th><th>Hora</th></tr></thead>
+        <tbody>
+          ${movs.slice().reverse().map(m => `
+            <tr>
+              <td><span class="badge ${m.type==='entrada'?'badge-green':'badge-red'}">${m.type==='entrada'?'↑ Entrada':'↓ Saída'}</span></td>
+              <td><span class="badge badge-grey">${m.cat || '–'}</span></td>
+              <td>${m.desc}</td>
+              <td style="font-weight:700;color:${m.type==='entrada'?'var(--success)':'var(--danger)'}">${fmtMT(m.amount)}</td>
+              <td>${m.date}</td><td>${m.time}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function openCashModal(type) {
+  currentCashType = type;
+  $('m-cash-title').textContent = type === 'entrada' ? '↑ Registar Entrada' : '↓ Registar Saída';
+  $('cash-save-btn').className = 'btn ' + (type === 'entrada' ? 'btn-success' : 'btn-danger');
+  $('cash-desc').value = ''; $('cash-val').value = '';
+  openModal('m-cash');
+}
+
+function saveCashMovement() {
+  const desc = $('cash-desc').value.trim();
+  const val = parseFloat($('cash-val').value);
+  if (!desc || isNaN(val) || val <= 0) { toast('Preencha descrição e valor válido', 'error'); return; }
+  DB.push('cash_movements', { id: uid(), type: currentCashType, cat: $('cash-cat').value, desc, amount: val, date: today(), time: nowTime() });
+  closeModal('m-cash');
+  aSection('cash');
+  toast('Movimento registado!', 'success');
+}
+
+function dailyClosing() {
+  const movs = DB.get('cash_movements') || [];
+  const tod = movs.filter(m => m.date === today());
+  const totIn = tod.filter(m => m.type === 'entrada').reduce((s, m) => s + m.amount, 0);
+  const totOut = tod.filter(m => m.type === 'saida').reduce((s, m) => s + m.amount, 0);
+  const orders = (DB.get('orders') || []).filter(o => o.date === today());
+  const report = `FECHO DIÁRIO — ÍRIS SABORES\nData: ${today()}\n${'─'.repeat(36)}\n\nTotal Entradas: ${fmtMT(totIn)}\nTotal Saídas: ${fmtMT(totOut)}\nSaldo do dia: ${fmtMT(totIn - totOut)}\n\nPedidos recebidos: ${orders.length}\nPedidos entregues: ${orders.filter(o=>o.status==='client_confirmed').length}\nPedidos cancelados: ${orders.filter(o=>o.status==='cancelled').length}\n\nMOVIMENTOS:\n${tod.map(m=>`${m.type==='entrada'?'+':'-'} ${fmtMT(m.amount)} — ${m.desc}`).join('\n')}`;
+  const blob = new Blob([report], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `fecho_${today()}.txt`; a.click();
+  URL.revokeObjectURL(url);
+  toast('Fecho diário exportado!', 'success');
+}
+
+/* --- STOCK --- */
+function renderStock() {
+  const stock = DB.get('stock') || [];
+  return `
+    <div class="section-head">
+      <h2>Gestão de <span>Stock</span></h2>
+      <button class="btn btn-primary" onclick="openModal('m-stock')"><i class="fas fa-plus"></i> Adicionar Produto</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">
+      ${stock.map(s => {
+        const pct = Math.min(100, (s.qty / s.max) * 100);
+        const cls = pct > 60 ? 'lvl-ok' : pct > 25 ? 'lvl-mid' : 'lvl-low';
+        const status = s.qty === 0 ? '<span class="badge badge-red">ESGOTADO</span>' : s.qty <= s.min ? '<span class="badge badge-amber">BAIXO</span>' : '<span class="badge badge-green">OK</span>';
+        return `
+          <div class="stock-card">
+            <div class="flex justify-between items-center mb-2">
+              <span style="font-weight:700;font-size:15px">${s.name}</span>${status}
+            </div>
+            <div class="text-sm text-muted mb-2">${s.qty} ${s.unit} disponível · Mín: ${s.min} · Máx: ${s.max}</div>
+            <div class="stock-bar-wrap"><div class="stock-bar-fill ${cls}" style="width:${pct}%"></div></div>
+            <div class="flex gap-2 mt-3">
+              <input type="number" value="${s.qty}" min="0" class="form-control" id="stk-${s.id}" style="width:80px;padding:7px 10px">
+              <button class="btn btn-primary btn-sm flex-1" onclick="updateStockItem('${s.id}')">Actualizar</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteStockItem('${s.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function updateStockItem(id) {
+  const stock = DB.get('stock') || [];
+  const s = stock.find(x => x.id === id);
+  if (!s) return;
+  const v = parseInt($('stk-' + id).value);
+  if (isNaN(v) || v < 0) { toast('Quantidade inválida', 'error'); return; }
+  s.qty = v;
+  DB.set('stock', stock);
+  aSection('stock');
+  toast('Stock actualizado!', 'success');
+}
+
+function deleteStockItem(id) {
+  if (!confirm('Eliminar este produto do stock?')) return;
+  DB.set('stock', (DB.get('stock') || []).filter(s => s.id !== id));
+  aSection('stock');
+  toast('Produto eliminado', 'info');
+}
+
+function saveStockItem() {
+  const name = $('sk-name').value.trim();
+  const unit = $('sk-unit').value.trim() || 'uni';
+  const qty = parseInt($('sk-qty').value) || 0;
+  const min = parseInt($('sk-min').value) || 10;
+  const max = parseInt($('sk-max').value) || 100;
+  if (!name) { toast('Nome obrigatório', 'error'); return; }
+  DB.push('stock', { id: uid(), name, unit, qty, min, max });
+  closeModal('m-stock');
+  aSection('stock');
+  toast('Produto adicionado ao armazém!', 'success');
+}
+
+/* --- MENU ADMIN --- */
+function renderMenuAdmin() {
+  const menu = DB.get('menu') || [];
+  const isAdmin = currentUser?.role === 'admin';
+  return `
+    <div class="section-head">
+      <h2>Gerir <span>Menu</span></h2>
+      ${isAdmin ? `<button class="btn btn-primary" onclick="openAddItem()"><i class="fas fa-plus"></i> Novo Item</button>` : ''}
+    </div>
+    <div class="table-wrap">
+      <table class="data-tbl">
+        <thead><tr><th></th><th>Nome</th><th>Cat.</th><th>Preço</th><th>Stock</th><th>Estado</th><th>Acções</th></tr></thead>
+        <tbody>
+          ${menu.map(item => `
+            <tr>
+              <td style="font-size:22px;text-align:center">${item.emoji || '🍽️'}</td>
+              <td><span style="font-weight:600">${item.name}</span></td>
+              <td><span class="badge badge-orange">${item.cat}</span></td>
+              <td style="font-weight:700;color:var(--orange)">${fmtMT(item.price)}</td>
+              <td><span class="badge ${item.stock===0?'badge-red':item.stock<=10?'badge-amber':'badge-green'}">${item.stock}</span></td>
+              <td><span class="badge ${item.active?'badge-green':'badge-grey'}">${item.active?'Activo':'Inactivo'}</span></td>
+              <td>
+                ${isAdmin ? `
+                  <div class="flex gap-1">
+                    <button class="btn btn-ghost btn-xs" onclick="openEditItem('${item.id}')"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteMenuItem('${item.id}')"><i class="fas fa-trash"></i></button>
+                  </div>` : '–'}
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function openAddItem() {
+  editingItemId = null;
+  $('m-item-title').textContent = 'Adicionar Item ao Menu';
+  ['mi-name','mi-emoji','mi-price','mi-desc'].forEach(id => $(id).value = '');
+  $('mi-stock').value = 50; $('mi-active').value = 1;
+  openModal('m-menu-item');
+}
+function openEditItem(id) {
+  editingItemId = id;
+  const item = (DB.get('menu') || []).find(m => m.id === id);
+  if (!item) return;
+  $('m-item-title').textContent = 'Editar Item';
+  $('mi-name').value = item.name; $('mi-emoji').value = item.emoji || '';
+  $('mi-cat').value = item.cat; $('mi-price').value = item.price;
+  $('mi-desc').value = item.desc || ''; $('mi-stock').value = item.stock;
+  $('mi-active').value = item.active ? 1 : 0;
+  openModal('m-menu-item');
+}
+function saveMenuItem() {
+  const name = $('mi-name').value.trim();
+  const price = parseFloat($('mi-price').value);
+  if (!name || isNaN(price)) { toast('Nome e preço obrigatórios', 'error'); return; }
+  const data = { name, cat: $('mi-cat').value, price, desc: $('mi-desc').value, emoji: $('mi-emoji').value || '🍽️', stock: parseInt($('mi-stock').value) || 0, active: $('mi-active').value === '1' };
+  const menu = DB.get('menu') || [];
+  if (editingItemId) {
+    const idx = menu.findIndex(m => m.id === editingItemId);
+    if (idx >= 0) menu[idx] = { ...menu[idx], ...data };
+  } else {
+    data.id = uid();
+    menu.push(data);
+    DB.push('stock', { id: uid(), name, unit: 'uni', qty: data.stock, min: 5, max: data.stock * 2 });
+  }
+  DB.set('menu', menu);
+  closeModal('m-menu-item');
+  buildMenu();
+  aSection('menu-admin');
+  toast('Item guardado!', 'success');
+}
+function deleteMenuItem(id) {
+  if (!confirm('Eliminar este item do menu?')) return;
+  DB.set('menu', (DB.get('menu') || []).filter(m => m.id !== id));
+  buildMenu(); aSection('menu-admin');
+  toast('Item eliminado', 'info');
+}
+
+/* --- WORKERS --- */
+function renderWorkers() {
+  const workers = DB.get('workers') || [];
+  const isAdmin = currentUser?.role === 'admin';
+  const orders = DB.get('orders') || [];
+  return `
+    <div class="section-head">
+      <h2>Horários & <span>Funcionários</span></h2>
+      ${isAdmin ? `<button class="btn btn-primary" onclick="openModal('m-worker')"><i class="fas fa-user-plus"></i> Adicionar</button>` : ''}
+    </div>
+    <div class="workers-grid mb-6">
+      ${workers.map(w => {
+        const todayCount = orders.filter(o => o.date === today() && o.assignedTo === w.id).length;
+        return `
+          <div class="worker-card">
+            <div class="worker-avatar">${w.name[0]}</div>
+            <div class="worker-name">${w.name}</div>
+            <div class="worker-role">${w.role}</div>
+            <div class="worker-detail"><i class="fas fa-clock"></i>${w.hours || '–'}</div>
+            <div class="worker-detail"><i class="fas fa-envelope"></i><span class="truncate">${w.email}</span></div>
+            <div class="worker-detail"><i class="fas fa-id-badge"></i><span class="badge badge-${w.type==='admin'?'green':w.type==='delivery'?'blue':'orange'}">${w.type||'worker'}</span></div>
+            ${isAdmin ? `
+              <div class="flex gap-2 mt-3">
+                <button class="btn btn-ghost btn-sm flex-1" onclick="deleteWorker('${w.id}')"><i class="fas fa-trash"></i> Remover</button>
+              </div>` : ''}
+          </div>`;
+      }).join('')}
+    </div>
+    <div class="card">
+      <div style="font-weight:700;font-size:16px;margin-bottom:14px">Fecho Individual — Hoje</div>
+      ${workers.map(w => {
+        const c = orders.filter(o => o.date === today() && o.assignedTo === w.id).length;
+        return `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span>${w.name} <span class="text-muted">(${w.role})</span></span><span class="text-orange fw-600">${c} pedidos</span></div>`;
+      }).join('')}
+    </div>`;
+}
+
+function saveWorker() {
+  const name = $('w-name').value.trim();
+  const email = $('w-email').value.trim();
+  const pass = $('w-pass').value;
+  if (!name || !email || !pass) { toast('Preencha todos os campos obrigatórios', 'error'); return; }
+  const all = [...(DB.get('users') || []), ...(DB.get('workers') || [])];
+  if (all.find(u => u.email === email)) { toast('Este email já está registado', 'error'); return; }
+  DB.push('workers', { id: uid(), name, role: $('w-role').value, email, pass, hours: $('w-hours').value, type: $('w-type').value });
+  closeModal('m-worker');
+  aSection('workers');
+  toast('Conta criada com sucesso!', 'success');
+}
+
+function deleteWorker(id) {
+  if (!confirm('Remover funcionário?')) return;
+  DB.set('workers', (DB.get('workers') || []).filter(w => w.id !== id));
+  aSection('workers');
+  toast('Funcionário removido', 'info');
+}
+
+/* --- ACCOUNTS --- */
+function renderAccounts() {
+  const all = [...(DB.get('users') || []), ...(DB.get('workers') || [])];
+  return `
+    <div class="section-head">
+      <h2>Gestão de <span>Contas</span></h2>
+      <button class="btn btn-primary" onclick="openModal('m-worker')"><i class="fas fa-user-plus"></i> Nova Conta</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-tbl">
+        <thead><tr><th>Avatar</th><th>Nome</th><th>Email</th><th>Tipo de Acesso</th><th>Acções</th></tr></thead>
+        <tbody>
+          ${all.map(u => `
+            <tr>
+              <td><div class="user-avatar" style="width:32px;height:32px;font-size:14px">${u.name[0]}</div></td>
+              <td style="font-weight:600">${u.name}</td>
+              <td class="text-muted text-sm">${u.email}</td>
+              <td><span class="badge ${u.role==='admin'||u.type==='admin'?'badge-green':u.type==='delivery'?'badge-blue':'badge-orange'}">${u.role || u.type || 'worker'}</span></td>
+              <td>
+                ${u.id !== 'u1' ? `<button class="btn btn-danger btn-xs" onclick="deleteAccount('${u.email}')"><i class="fas fa-trash"></i> Eliminar</button>` : '<span class="badge badge-green">Super Admin</span>'}
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function deleteAccount(email) {
+  if (!confirm('Eliminar esta conta?')) return;
+  DB.set('workers', (DB.get('workers') || []).filter(w => w.email !== email));
+  aSection('accounts');
+  toast('Conta eliminada', 'info');
+}
+
+/* --- REPORTS --- */
+function renderReports() {
+  const orders = DB.get('orders') || [];
+  const movs = DB.get('cash_movements') || [];
+  const stock = DB.get('stock') || [];
+  const totRevenue = orders.reduce((s, o) => s + o.total, 0);
+  const avgOrder = orders.length ? (totRevenue / orders.length).toFixed(0) : 0;
+  const rated = orders.filter(o => o.rating);
+  const avgRating = rated.length ? (rated.reduce((s, o) => s + o.rating, 0) / rated.length).toFixed(1) : 0;
+
+  const topItems = {};
+  orders.forEach(o => o.items.forEach(i => { topItems[i.name] = (topItems[i.name] || 0) + i.qty; }));
+  const top5 = Object.entries(topItems).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  return `
+    <div class="section-head">
+      <h2>Relatórios & <span>Análises</span></h2>
+      <button class="btn btn-primary" onclick="exportFullReport()"><i class="fas fa-download"></i> Exportar Relatório</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-label">Receita Total</div><div class="stat-val text-orange">${fmtMT(totRevenue)}</div></div>
+      <div class="stat-card"><div class="stat-label">Total Pedidos</div><div class="stat-val text-success">${orders.length}</div></div>
+      <div class="stat-card"><div class="stat-label">Ticket Médio</div><div class="stat-val text-info">${fmtMT(avgOrder)}</div></div>
+      <div class="stat-card"><div class="stat-label">Satisfação</div><div class="stat-val text-amber">${avgRating} ⭐</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="report-block">
+        <h3>🏆 Top 5 Mais Vendidos</h3>
+        ${top5.length === 0 ? '<p class="text-muted text-sm">Nenhum dado disponível</p>' :
+          top5.map(([name, qty], i) => `
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+              <span style="color:var(--orange);font-weight:700;width:20px">#${i+1}</span>
+              <span style="flex:1;font-size:13px">${name}</span>
+              <span class="badge badge-orange">${qty} un.</span>
+            </div>`).join('')}
+      </div>
+      <div class="report-block">
+        <h3>⭐ Avaliações</h3>
+        ${[5,4,3,2,1].map(v => {
+          const n = orders.filter(o => o.rating === v).length;
+          const pct = rated.length ? Math.round(n / rated.length * 100) : 0;
+          return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px">
+            <span style="color:var(--amber);width:60px">${'★'.repeat(v)}${'☆'.repeat(5-v)}</span>
+            <div style="flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--amber)"></div></div>
+            <span style="width:28px;text-align:right;color:var(--muted)">${n}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="report-block">
+        <h3>💰 Resumo Financeiro</h3>
+        ${[['Hoje', o => o.date === today()],['Esta semana', o => isThisWeek(o.date)],['Este mês', o => isThisMonth(o.date)],['Total', () => true]].map(([lbl, fn]) => {
+          const r = orders.filter(fn).reduce((s, o) => s + o.total, 0);
+          const c = orders.filter(fn).length;
+          return `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span>${lbl}</span><span style="color:var(--orange);font-weight:700">${fmtMT(r)} <span style="color:var(--muted);font-weight:400">(${c})</span></span></div>`;
+        }).join('')}
+      </div>
+      <div class="report-block">
+        <h3>📦 Resumo de Stock</h3>
+        <div style="display:flex;gap:12px;margin-bottom:12px">
+          <div class="text-center flex-1"><div style="font-size:24px;font-weight:700;color:var(--success)">${stock.filter(s=>s.qty>s.min).length}</div><div class="text-xs text-muted">Em stock</div></div>
+          <div class="text-center flex-1"><div style="font-size:24px;font-weight:700;color:var(--warning)">${stock.filter(s=>s.qty>0&&s.qty<=s.min).length}</div><div class="text-xs text-muted">Stock baixo</div></div>
+          <div class="text-center flex-1"><div style="font-size:24px;font-weight:700;color:var(--danger)">${stock.filter(s=>s.qty===0).length}</div><div class="text-xs text-muted">Esgotados</div></div>
+        </div>
+        ${stock.filter(s=>s.qty<=s.min).map(s=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)"><span>${s.name}</span><span class="badge ${s.qty===0?'badge-red':'badge-amber'}">${s.qty} ${s.unit}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function exportFullReport() {
+  const orders = DB.get('orders') || [];
+  const movs = DB.get('cash_movements') || [];
+  const stock = DB.get('stock') || [];
+  const totRevenue = orders.reduce((s, o) => s + o.total, 0);
+  let r = `RELATÓRIO COMPLETO — ÍRIS SABORES\nGerado: ${new Date().toLocaleString('pt')}\n${'═'.repeat(50)}\n\n`;
+  r += `RESUMO FINANCEIRO\n${'─'.repeat(40)}\nReceita Total: ${fmtMT(totRevenue)}\nTotal Pedidos: ${orders.length}\nTicket Médio: ${fmtMT(orders.length ? totRevenue / orders.length : 0)}\n\n`;
+  r += `PEDIDOS\n${'─'.repeat(40)}\n`;
+  orders.forEach(o => r += `${o.id} | ${o.date} | ${o.customer.name} | ${fmtMT(o.total)} | ${o.status}\n`);
+  r += `\nMOVIMENTOS DE CAIXA\n${'─'.repeat(40)}\n`;
+  movs.forEach(m => r += `${m.date} | ${m.type==='entrada'?'+':'-'} ${fmtMT(m.amount)} | ${m.desc}\n`);
+  r += `\nSTOCK\n${'─'.repeat(40)}\n`;
+  stock.forEach(s => r += `${s.name}: ${s.qty} ${s.unit} (mín: ${s.min})\n`);
+  const blob = new Blob([r], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `iris_relatorio_${today()}.txt`; a.click();
+  URL.revokeObjectURL(url);
+  toast('Relatório exportado!', 'success');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODALS & TOASTS
+═══════════════════════════════════════════════════════════ */
+function openModal(id) { $(id).classList.add('open'); }
+function closeModal(id) { $(id).classList.remove('open'); }
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(mo => {
+  mo.addEventListener('click', e => { if (e.target === mo) closeModal(mo.id); });
+});
+
+function toast(msg, type = 'info') {
+  const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+  const t = document.createElement('div');
+  t.className = `toast t-${type}`;
+  t.innerHTML = `<span>${icons[type]}</span><span style="flex:1">${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>`;
+  $('toast-wrap').appendChild(t);
+  setTimeout(() => { t.style.transition = 'opacity .4s'; t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3500);
+}
+
+
+</script>
+</body>
+</html>
