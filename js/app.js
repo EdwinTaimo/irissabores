@@ -207,3 +207,4 @@ if (ticker) {
 document.querySelectorAll('.reveal').forEach(el => {
   el.style.transition = 'opacity .7s ease, transform .7s ease';
 });
+
