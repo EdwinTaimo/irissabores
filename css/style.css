@@ -601,6 +601,58 @@ body:hover .cursor-ring { }
 .cc-val.link:hover { color: var(--orange-l); }
 .contacto-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
+/* Map link block */
+.map-link-block { display: block; text-decoration: none; }
+.map-static-bg {
+  height: 360px; border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--dark3) 0%, #1e1e1e 50%, #252015 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; position: relative; overflow: hidden;
+  transition: all var(--trans);
+  border: 1px solid rgba(232,82,10,.15);
+}
+.map-static-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(232,82,10,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,82,10,.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.map-static-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(232,82,10,.08) 0%, transparent 70%);
+}
+.map-link-block:hover .map-static-bg {
+  border-color: rgba(232,82,10,.4);
+  background: linear-gradient(135deg, #1e1010 0%, #1e1a10 100%);
+}
+.map-pin-icon {
+  font-size: 52px; z-index: 1;
+  animation: mapPinBounce 2s ease-in-out infinite;
+  filter: drop-shadow(0 4px 16px rgba(232,82,10,.5));
+}
+@keyframes mapPinBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.map-open-label {
+  z-index: 1; text-align: center; display: flex; flex-direction: column; gap: 6px;
+}
+.map-open-title {
+  font-family: var(--font-disp); font-size: 20px; font-weight: 700; color: var(--cream);
+}
+.map-open-sub {
+  font-size: 13px; color: var(--orange); font-weight: 600;
+  background: rgba(232,82,10,.1); border: 1px solid rgba(232,82,10,.25);
+  padding: 6px 16px; border-radius: 50px;
+  transition: all var(--trans);
+}
+.map-link-block:hover .map-open-sub {
+  background: var(--orange); color: var(--white);
+}
+
 /* Map */
 .map-frame {
   border-radius: var(--radius-lg); overflow: hidden;
