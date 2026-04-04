@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Íris Sabores — Take-Away · Maputo</title>
+  <meta name="description" content="Íris Sabores Take-Away — Sabores autênticos em Maputo. Refeições, Pizzas, Mariscos, Sandes e muito mais." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── CURSOR PERSONALIZADO ── -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ── LOADER ── -->
+<div class="page-loader" id="loader">
+  <div class="loader-inner">
+    <img src="assets/logo.png" alt="Íris Sabores" class="loader-logo" />
+    <div class="loader-brand">Íris Sabores</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <img src="assets/logo.png" alt="Íris Sabores" class="nav-logo-img" />
+      <span class="nav-logo-text">Íris <em>Sabores</em></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#inicio" class="nav-link">Início</a></li>
+      <li><a href="#sobre" class="nav-link">Sobre</a></li>
+      <li><a href="#menu" class="nav-link">Menu</a></li>
+      <li><a href="#semana" class="nav-link">Semana</a></li>
+      <li><a href="#contacto" class="nav-link">Contacto</a></li>
+    </ul>
+    <a href="tel:+258878743430" class="nav-cta">
+      <span>📞</span> Encomendar
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-bg">
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1600&q=80&auto=format&fit=crop" alt="Refeição Íris Sabores" class="hero-img" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-grain"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-logo-wrap reveal">
+      <img src="assets/logo.png" alt="Íris Sabores" class="hero-logo" />
+    </div>
+    <div class="hero-tag reveal delay-1">Take-Away · Maputo</div>
+    <h1 class="hero-title reveal delay-2">
+      Sabores que<br /><em>ficam na memória</em>
+    </h1>
+    <p class="hero-sub reveal delay-3">
+      Refeições autênticas, pizzas artesanais, mariscos frescos<br />e muito mais — prontos para levar.
+    </p>
+    <div class="hero-actions reveal delay-4">
+      <a href="#menu" class="btn-primary">Ver Menu Completo</a>
+      <a href="tel:+258878743430" class="btn-ghost">📞 +258 87 874 3430</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+
+  <!-- Floating badges -->
+  <div class="hero-badge badge-left reveal delay-3">
+    <span class="badge-icon">🔥</span>
+    <span>Fresco todos os dias</span>
+  </div>
+  <div class="hero-badge badge-right reveal delay-4">
+    <span class="badge-icon">🚀</span>
+    <span>Take-Away rápido</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FAIXA DE CATEGORIAS
+══════════════════════════════════════ -->
+<div class="ticker-strip">
+  <div class="ticker-content">
+    🍕 Pizzas &nbsp;·&nbsp; 🦐 Mariscos &nbsp;·&nbsp; 🥩 Refeições &nbsp;·&nbsp; 🥪 Sandes &nbsp;·&nbsp; 🥗 Saladas &nbsp;·&nbsp; ☕ Bebidas &nbsp;·&nbsp; 🍰 Sobremesas &nbsp;·&nbsp; 🦀 Frutos do Mar &nbsp;·&nbsp; 🍔 Hambúrgueres &nbsp;·&nbsp;
+    🍕 Pizzas &nbsp;·&nbsp; 🦐 Mariscos &nbsp;·&nbsp; 🥩 Refeições &nbsp;·&nbsp; 🥪 Sandes &nbsp;·&nbsp; 🥗 Saladas &nbsp;·&nbsp; ☕ Bebidas &nbsp;·&nbsp; 🍰 Sobremesas &nbsp;·&nbsp; 🦀 Frutos do Mar &nbsp;·&nbsp; 🍔 Hambúrgueres &nbsp;·&nbsp;
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SOBRE
+══════════════════════════════════════ -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-imgs">
+        <div class="sobre-img-main reveal">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80&auto=format&fit=crop" alt="Restaurante Íris Sabores" />
+          <div class="sobre-img-badge">
+            <img src="assets/logo.png" alt="Logo" />
+            <span>Desde 2020</span>
+          </div>
+        </div>
+        <div class="sobre-img-side reveal delay-2">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop" alt="Prato Íris Sabores" />
+        </div>
+      </div>
+      <div class="sobre-text">
+        <div class="section-tag reveal">Quem somos</div>
+        <h2 class="section-title reveal delay-1">Uma experiência<br /><em>única em Maputo</em></h2>
+        <p class="sobre-desc reveal delay-2">
+          O Íris Sabores nasceu da paixão pela gastronomia moçambicana e internacional. 
+          Preparamos cada prato com ingredientes frescos, selecionados diariamente, 
+          para garantir o melhor sabor na sua mesa — ou em take-away.
+        </p>
+        <div class="sobre-stats reveal delay-3">
+          <div class="stat">
+            <div class="stat-num">100+</div>
+            <div class="stat-lbl">Pratos no menu</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5★</div>
+            <div class="stat-lbl">Avaliação média</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Fast</div>
+            <div class="stat-lbl">Take-Away</div>
+          </div>
+        </div>
+        <div class="sobre-info reveal delay-4">
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <span>Rua Artur do Canto Resende nº 1.390, Maputo</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📞</span>
+            <span><a href="tel:+258878743430">+258 87 874 3430</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MENU COMPLETO
+══════════════════════════════════════ -->
+<section class="menu-section" id="menu">
+  <div class="menu-bg-decor"></div>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag reveal">O nosso menu</div>
+      <h2 class="section-title reveal delay-1">Descubra os nossos<br /><em>sabores irresistíveis</em></h2>
+    </div>
+
+    <!-- Tabs -->
+    <div class="menu-tabs reveal delay-2">
+      <button class="menu-tab active" data-cat="entradas">🥗 Entradas & Saladas</button>
+      <button class="menu-tab" data-cat="sandes">🥪 Sandes</button>
+      <button class="menu-tab" data-cat="refeicoes">🍽️ Refeições</button>
+      <button class="menu-tab" data-cat="mariscos">🦐 Mariscos & Peixe</button>
+      <button class="menu-tab" data-cat="pizzas">🍕 Pizzas</button>
+      <button class="menu-tab" data-cat="bebidas">🥤 Bebidas</button>
+      <button class="menu-tab" data-cat="sobremesas">🍰 Sobremesas</button>
+    </div>
+
+    <!-- ─── ENTRADAS & SALADAS ─── -->
+    <div class="menu-panel active" id="cat-entradas">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200&q=80&auto=format&fit=crop" alt="Entradas e Saladas" />
+        <div class="menu-photo-label">Entradas & Saladas</div>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Entradas</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Chamussas</span><span class="item-price">50 MT</span></li>
+            <li class="menu-item"><span class="item-name">Rissóis</span><span class="item-price">50 MT</span></li>
+            <li class="menu-item"><span class="item-name">Coxinhas</span><span class="item-price">50 MT</span></li>
+            <li class="menu-item"><span class="item-name">SpringRoll</span><span class="item-price">50 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sopa</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item"><span class="item-name">Azeitonas Pretas</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Azeitonas Verdes</span><span class="item-price">150 MT</span></li>
+          </ul>
+        </div>
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Saladas</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Salada Normal</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Salada Mista</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Salada Grega</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Salada de Galinha</span><span class="item-price">300 MT</span></li>
+            <li class="menu-item"><span class="item-name">Salada de Camarão</span><span class="item-price">350 MT</span></li>
+          </ul>
+          <div class="menu-col-title" style="margin-top:24px"><span class="brush-title">Extras</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Doze de Batata</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chima</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item"><span class="item-name">Arroz</span><span class="item-price">150 MT</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SANDES ─── -->
+    <div class="menu-panel" id="cat-sandes">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&q=80&auto=format&fit=crop" alt="Sandes e Hambúrgueres" />
+        <div class="menu-photo-label">Sandes & Hambúrgueres</div>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Sandes</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Sandes de Ovo</span><span class="item-price">130 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sandes Mista</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sandes de Fiambre</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Cachorro Quente Simples</span><span class="item-price">170 MT</span></li>
+            <li class="menu-item"><span class="item-name">Cachorro Quente Completo</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Tosta de Atum</span><span class="item-price">300 MT</span></li>
+            <li class="menu-item"><span class="item-name">Tosta de Queijo</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Tosta Mista</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Tosta de Fiambre</span><span class="item-price">270 MT</span></li>
+            <li class="menu-item"><span class="item-name">Tosta Três Ingredientes</span><span class="item-price">300 MT</span></li>
+            <li class="menu-item"><span class="item-name">Tosta de Carne</span><span class="item-price">350 MT</span></li>
+            <li class="menu-item"><span class="item-name">Prego no Pão</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Prego no Pão Completo</span><span class="item-price">350 MT</span></li>
+          </ul>
+        </div>
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Hambúrgueres</span></div>
+          <ul class="menu-list">
+            <li class="menu-item highlight"><span class="item-name">Hambúrguer Simples</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item highlight"><span class="item-name">Hambúrguer Completo</span><span class="item-price">300 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Hambúrguer à Iris Sabores</span><span class="item-price">450 MT</span></li>
+          </ul>
+          <div class="menu-img-card">
+            <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?w=600&q=80&auto=format&fit=crop" alt="Hambúrguer Íris Sabores" />
+            <div class="menu-img-label">🔥 Especialidade da Casa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── REFEIÇÕES ─── -->
+    <div class="menu-panel" id="cat-refeicoes">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80&auto=format&fit=crop" alt="Refeições Íris Sabores" />
+        <div class="menu-photo-label">Refeições</div>
+      </div>
+      <div class="menu-cols single">
+        <div class="menu-col full">
+          <div class="menu-col-title"><span class="brush-title">Refeições</span></div>
+          <div class="menu-grid-2">
+            <ul class="menu-list">
+              <li class="menu-item"><span class="item-name">¼ Frango <small>(Arroz, Batata e Salada)</small></span><span class="item-price">400 MT</span></li>
+              <li class="menu-item"><span class="item-name">½ Frango <small>(Arroz, Batata e Salada)</small></span><span class="item-price">580 MT</span></li>
+              <li class="menu-item"><span class="item-name">1 Frango <small>(Arroz, Batata e Salada)</small></span><span class="item-price">1.000 MT</span></li>
+              <li class="menu-item"><span class="item-name">½ Frango à Passarinho com Batata</span><span class="item-price">580 MT</span></li>
+              <li class="menu-item"><span class="item-name">Massa Chinesa de Frango</span><span class="item-price">550 MT</span></li>
+              <li class="menu-item"><span class="item-name">Massa Chinesa de Bife</span><span class="item-price">550 MT</span></li>
+              <li class="menu-item"><span class="item-name">Massa Chinesa de Camarão</span><span class="item-price">750 MT</span></li>
+              <li class="menu-item"><span class="item-name">Prego no Prato <small>(Arroz, Batata e Salada)</small></span><span class="item-price">650 MT</span></li>
+              <li class="menu-item"><span class="item-name">Bife de Frango <small>(Arroz, Batata e Salada)</small></span><span class="item-price">700 MT</span></li>
+            </ul>
+            <ul class="menu-list">
+              <li class="menu-item"><span class="item-name">Bife com Natas <small>(Arroz, Batata e Salada)</small></span><span class="item-price">800 MT</span></li>
+              <li class="menu-item"><span class="item-name">Bife de Frango Grelhado <small>(Arroz, Batata e Salada)</small></span><span class="item-price">600 MT</span></li>
+              <li class="menu-item highlight special"><span class="item-name">Picanha <small>(Arroz, Batata e Salada)</small></span><span class="item-price">1.100 MT</span></li>
+              <li class="menu-item highlight special"><span class="item-name">T-Bone <small>(Arroz, Batata e Salada)</small></span><span class="item-price">1.000 MT</span></li>
+              <li class="menu-item"><span class="item-name">Bife com Molho de Alho</span><span class="item-price">900 MT</span></li>
+              <li class="menu-item"><span class="item-name">Bitoque</span><span class="item-price">500 MT</span></li>
+              <li class="menu-item"><span class="item-name">Atum Conservado</span><span class="item-price">500 MT</span></li>
+              <li class="menu-item highlight special"><span class="item-name">Arroz de Marisco</span><span class="item-price">2.900 MT</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── MARISCOS ─── -->
+    <div class="menu-panel" id="cat-mariscos">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=1200&q=80&auto=format&fit=crop" alt="Mariscos Íris Sabores" />
+        <div class="menu-photo-label">Mariscos & Peixe</div>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Camarão & Mar</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Camarão Panado <small>(com batata & salada)</small></span><span class="item-price">450 MT</span></li>
+            <li class="menu-item"><span class="item-name">Camarão Grelhado</span><span class="item-price">700 MT</span></li>
+            <li class="menu-item"><span class="item-name">Camarão Panado <small>(Arroz, Batata, Salada)</small></span><span class="item-price">550 MT</span></li>
+            <li class="menu-item"><span class="item-name">Camarão Grelhado Q</span><span class="item-price">800 MT</span></li>
+            <li class="menu-item"><span class="item-name">Camarão Grelhado TG</span><span class="item-price">1.300 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Camarão Grelhado Jumbo</span><span class="item-price">1.550 MT</span></li>
+            <li class="menu-item"><span class="item-name">Lulas Grelhadas</span><span class="item-price">900 MT</span></li>
+            <li class="menu-item"><span class="item-name">Lulas Panadas</span><span class="item-price">800 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Lagostas</span><span class="item-price">2.100 MT</span></li>
+          </ul>
+        </div>
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Combos & Peixe</span></div>
+          <ul class="menu-list">
+            <li class="menu-item highlight special"><span class="item-name">Combo de Carne</span><span class="item-price">2.800 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Combo de Mariscos</span><span class="item-price">3.100 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Arco-Íris</span><span class="item-price">3.500 MT</span></li>
+            <li class="menu-item"><span class="item-name">Peixe de Serra em Posta <small>(Arroz, Batata, Salada)</small></span><span class="item-price">650 MT</span></li>
+            <li class="menu-item"><span class="item-name">Peixe Garoupa Médio <small>(Arroz, Batata, Salada)</small></span><span class="item-price">850 MT</span></li>
+            <li class="menu-item"><span class="item-name">Peixe Pende Médio <small>(Arroz, Batata, Salada)</small></span><span class="item-price">850 MT</span></li>
+            <li class="menu-item"><span class="item-name">Peixe Pedra Médio <small>(Arroz, Batata, Salada)</small></span><span class="item-price">850 MT</span></li>
+            <li class="menu-item"><span class="item-name">Peixe Vermelhão Médio <small>(Arroz, Batata, Salada ou Legumes)</small></span><span class="item-price">850 MT</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PIZZAS ─── -->
+    <div class="menu-panel" id="cat-pizzas">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80&auto=format&fit=crop" alt="Pizzas Íris Sabores" />
+        <div class="menu-photo-label">Pizzas — Vários Sabores</div>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Grandes</span></div>
+          <ul class="menu-list numbered">
+            <li class="menu-item"><span class="item-num">01</span><span class="item-name">Pizza Margarida Grande</span><span class="item-price">500 MT</span></li>
+            <li class="menu-item"><span class="item-num">02</span><span class="item-name">Pizza Vegetariana Grande</span><span class="item-price">650 MT</span></li>
+            <li class="menu-item"><span class="item-num">03</span><span class="item-name">Pizza de Atum Grande</span><span class="item-price">730 MT</span></li>
+            <li class="menu-item"><span class="item-num">04</span><span class="item-name">Pizza de Galinha Grande</span><span class="item-price">750 MT</span></li>
+            <li class="menu-item"><span class="item-num">05</span><span class="item-name">Pizza Mexicana Grande</span><span class="item-price">770 MT</span></li>
+            <li class="menu-item"><span class="item-num">06</span><span class="item-name">Pizza de Camarão Grande</span><span class="item-price">800 MT</span></li>
+            <li class="menu-item"><span class="item-num">07</span><span class="item-name">Pizza Awena Grande</span><span class="item-price">800 MT</span></li>
+            <li class="menu-item"><span class="item-num">08</span><span class="item-name">Pizza Bolonhesa Grande</span><span class="item-price">800 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-num">09</span><span class="item-name">Pizza 4 Estações Grande</span><span class="item-price">850 MT</span></li>
+          </ul>
+        </div>
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Médias</span></div>
+          <ul class="menu-list numbered">
+            <li class="menu-item"><span class="item-num">10</span><span class="item-name">Pizza Margarida Média</span><span class="item-price">400 MT</span></li>
+            <li class="menu-item"><span class="item-num">11</span><span class="item-name">Pizza Vegetariana Média</span><span class="item-price">500 MT</span></li>
+            <li class="menu-item"><span class="item-num">12</span><span class="item-name">Pizza de Atum Média</span><span class="item-price">580 MT</span></li>
+            <li class="menu-item"><span class="item-num">13</span><span class="item-name">Pizza de Galinha Média</span><span class="item-price">600 MT</span></li>
+            <li class="menu-item"><span class="item-num">14</span><span class="item-name">Pizza Mexicana Média</span><span class="item-price">600 MT</span></li>
+            <li class="menu-item"><span class="item-num">15</span><span class="item-name">Pizza Awena Média</span><span class="item-price">600 MT</span></li>
+            <li class="menu-item"><span class="item-num">16</span><span class="item-name">Pizza Bolonhesa Média</span><span class="item-price">600 MT</span></li>
+            <li class="menu-item"><span class="item-num">17</span><span class="item-name">Pizza 4 Estações Média</span><span class="item-price">700 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-num">18</span><span class="item-name">Pizza de Camarão Média</span><span class="item-price">730 MT</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── BEBIDAS ─── -->
+    <div class="menu-panel" id="cat-bebidas">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=1200&q=80&auto=format&fit=crop" alt="Bebidas Íris Sabores" />
+        <div class="menu-photo-label">Bebidas</div>
+      </div>
+      <div class="menu-cols tri">
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Refrigerantes</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Redbull</span><span class="item-price">120 MT</span></li>
+            <li class="menu-item"><span class="item-name">Coca-Cola</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Coca Zero</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Fanta Ananas</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Fanta Laranja</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Fanta Uva</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sparleta Morango</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sparleta Cream Soda</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Dry Lemon</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Ginger All</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Lemon Twist</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Limonada</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sprite</span><span class="item-price">70 MT</span></li>
+          </ul>
+          <div class="menu-col-title" style="margin-top:20px"><span class="brush-title">Sumos</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Sumo de Manga (natural)</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sumo de Maçã (natural)</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sumo de Ananás (natural)</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sumo de Cenoura (natural)</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sumo de Laranja (natural)</span><span class="item-price">180 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sumo Compal 1L</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sumo Ceres 1L</span><span class="item-price">90 MT</span></li>
+            <li class="menu-item"><span class="item-name">Cappy</span><span class="item-price">80 MT</span></li>
+            <li class="menu-item"><span class="item-name">Mazoe</span><span class="item-price">150 MT</span></li>
+          </ul>
+          <div class="menu-col-title" style="margin-top:20px"><span class="brush-title">Água</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Agua Vumba 1.5 L</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Água Vumba 0.5 L</span><span class="item-price">40 MT</span></li>
+            <li class="menu-item"><span class="item-name">Água das Pedras</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item"><span class="item-name">Água Soda</span><span class="item-price">70 MT</span></li>
+            <li class="menu-item"><span class="item-name">Água Tônica</span><span class="item-price">70 MT</span></li>
+          </ul>
+        </div>
+        <div class="menu-col">
+          <div class="menu-col-title"><span class="brush-title">Quentes</span></div>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Galão</span><span class="item-price">170 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café Bica</span><span class="item-price">180 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café Expresso</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café de Máquina</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café Ricoff</span><span class="item-price">80 MT</span></li>
+            <li class="menu-item"><span class="item-name">Capuchino</span><span class="item-price">120 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café com Leite</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chá de Leite</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chá Simples</span><span class="item-price">50 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chá Verde</span><span class="item-price">80 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chá de Limão</span><span class="item-price">80 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chá de Camomila</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item"><span class="item-name">Chocolate Quente</span><span class="item-price">170 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café Gelado Simples</span><span class="item-price">200 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café Gelado com Leite</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Frappuccino</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café gelado com laranja e tónica</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Café gelado vegano</span><span class="item-price">250 MT</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SOBREMESAS ─── -->
+    <div class="menu-panel" id="cat-sobremesas">
+      <div class="menu-photo-banner">
+        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1200&q=80&auto=format&fit=crop" alt="Sobremesas Íris Sabores" />
+        <div class="menu-photo-label">Sobremesas</div>
+      </div>
+      <div class="menu-cols single">
+        <div class="menu-col" style="max-width:500px;margin:0 auto">
+          <div class="menu-col-title"><span class="brush-title">Sobremesas</span></div>
+          <ul class="menu-list">
+            <li class="menu-item highlight"><span class="item-name">Sorvete Mistura</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item"><span class="item-name">Sorvete Simples</span><span class="item-price">100 MT</span></li>
+            <li class="menu-item highlight"><span class="item-name">Pudim</span><span class="item-price">150 MT</span></li>
+            <li class="menu-item"><span class="item-name">Salada de Fruta</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Mousse Malambe</span><span class="item-price">250 MT</span></li>
+            <li class="menu-item highlight special"><span class="item-name">Bolo Gelado</span><span class="item-price">250 MT</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MENU DA SEMANA
+══════════════════════════════════════ -->
+<section class="semana-section" id="semana">
+  <div class="semana-bg">
+    <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1600&q=80&auto=format&fit=crop" alt="Menu da semana" />
+    <div class="semana-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="section-header light">
+      <div class="section-tag reveal">Especial</div>
+      <h2 class="section-title reveal delay-1">Menu da <em>Semana</em></h2>
+      <p class="section-sub reveal delay-2">Cada dia um prato especial a 400 MT — com arroz de legumes, saladas e sopa de entrada.</p>
+    </div>
+    <div class="semana-grid">
+      <div class="semana-card reveal" style="--delay:.1s">
+        <div class="semana-day">Segunda</div>
+        <div class="semana-items">
+          <div class="semana-item"><span class="semana-num">01</span><span>Cabrito Estufado</span><span class="semana-preco">400 MT</span></div>
+          <div class="semana-item"><span class="semana-num">02</span><span>Bife Acebolado</span><span class="semana-preco">400 MT</span></div>
+        </div>
+        <div class="semana-inc">Arroz de legumes e saladas (Sopa de entrada)</div>
+      </div>
+      <div class="semana-card reveal" style="--delay:.2s">
+        <div class="semana-day">Terça</div>
+        <div class="semana-items">
+          <div class="semana-item"><span class="semana-num">01</span><span>Peixe de Serra</span><span class="semana-preco">400 MT</span></div>
+          <div class="semana-item"><span class="semana-num">02</span><span>Postas Peixe Pedra</span><span class="semana-preco">400 MT</span></div>
+        </div>
+        <div class="semana-inc">Arroz de legumes e saladas (Sopa de entrada)</div>
+      </div>
+      <div class="semana-card reveal" style="--delay:.3s">
+        <div class="semana-day">Quarta</div>
+        <div class="semana-items">
+          <div class="semana-item"><span class="semana-num">01</span><span>Verduras</span><span class="semana-preco">400 MT</span></div>
+          <div class="semana-item"><span class="semana-num">02</span><span>Peixe e Feijoada</span><span class="semana-preco">400 MT</span></div>
+        </div>
+        <div class="semana-inc">Arroz branco</div>
+      </div>
+      <div class="semana-card reveal" style="--delay:.4s">
+        <div class="semana-day">Quinta</div>
+        <div class="semana-items">
+          <div class="semana-item"><span class="semana-num">01</span><span>Carne de Pato</span><span class="semana-preco">400 MT</span></div>
+          <div class="semana-item"><span class="semana-num">02</span><span>Frango à Zambéziana</span><span class="semana-preco">400 MT</span></div>
+        </div>
+        <div class="semana-inc">Arroz de legumes e saladas (Sopa de entrada)</div>
+      </div>
+      <div class="semana-card reveal" style="--delay:.5s">
+        <div class="semana-day">Sexta</div>
+        <div class="semana-items">
+          <div class="semana-item"><span class="semana-num">01</span><span>Lulas</span><span class="semana-preco">400 MT</span></div>
+          <div class="semana-item"><span class="semana-num">02</span><span>Camarão Grelhado</span><span class="semana-preco">400 MT</span></div>
+        </div>
+        <div class="semana-inc">Arroz de legumes e saladas (Sopa de entrada)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     GALERIA
+══════════════════════════════════════ -->
+<section class="galeria-section">
+  <div class="galeria-header container">
+    <div class="section-tag reveal">Galeria</div>
+    <h2 class="section-title reveal delay-1">Os nossos <em>pratos</em></h2>
+  </div>
+  <div class="galeria-grid">
+    <div class="gal-item tall reveal"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Prato Íris" /><div class="gal-overlay"><span>Refeições</span></div></div>
+    <div class="gal-item reveal delay-1"><img src="https://images.unsplash.com/photo-1606851091851-e8c8c0fca5ba?w=600&q=80&auto=format&fit=crop" alt="Pizza Íris" /><div class="gal-overlay"><span>Pizzas</span></div></div>
+    <div class="gal-item reveal delay-2"><img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80&auto=format&fit=crop" alt="Mariscos Íris" /><div class="gal-overlay"><span>Mariscos</span></div></div>
+    <div class="gal-item wide reveal delay-1"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80&auto=format&fit=crop" alt="Refeição especial" /><div class="gal-overlay"><span>Chef's Special</span></div></div>
+    <div class="gal-item reveal delay-3"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80&auto=format&fit=crop" alt="Hambúrguer" /><div class="gal-overlay"><span>Hambúrgueres</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACTO
+══════════════════════════════════════ -->
+<section class="contacto-section" id="contacto">
+  <div class="container">
+    <div class="contacto-grid">
+      <div class="contacto-text">
+        <div class="section-tag reveal">Encontre-nos</div>
+        <h2 class="section-title reveal delay-1">Venha visitar-nos<br /><em>ou encomende já</em></h2>
+        <div class="contacto-cards">
+          <div class="contacto-card reveal delay-2">
+            <div class="cc-icon">📍</div>
+            <div>
+              <div class="cc-label">Morada</div>
+              <div class="cc-val">Rua Artur do Canto Resende nº 1.390, Maputo</div>
+            </div>
+          </div>
+          <div class="contacto-card reveal delay-3">
+            <div class="cc-icon">📞</div>
+            <div>
+              <div class="cc-label">Telefone</div>
+              <a href="tel:+258878743430" class="cc-val link">+258 87 874 3430</a>
+            </div>
+          </div>
+          <div class="contacto-card reveal delay-4">
+            <div class="cc-icon">🕐</div>
+            <div>
+              <div class="cc-label">Horário</div>
+              <div class="cc-val">Todos os dias · Almoço & Jantar</div>
+            </div>
+          </div>
+        </div>
+        <div class="contacto-actions reveal delay-4">
+          <a href="tel:+258878743430" class="btn-primary">📞 Ligar Agora</a>
+          <a href="https://wa.me/258878743430" target="_blank" class="btn-ghost whatsapp">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="contacto-map reveal delay-2">
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.0!2d32.5892!3d-25.9663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDU3JzU4LjciUyAzMsKwMzUnMjEuMSJF!5e0!3m2!1spt!2smz!4v1700000000000"
+            width="100%" height="360" style="border:0" allowfullscreen loading="lazy">
+          </iframe>
+          <div class="map-badge">
+            <img src="assets/logo.png" alt="Íris Sabores" />
+            <div>
+              <div class="map-badge-name">Íris Sabores</div>
+              <div class="map-badge-sub">Take-Away · Maputo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Íris Sabores" class="footer-logo" />
+          <div class="footer-brand-name">Íris Sabores</div>
+          <div class="footer-brand-tag">Take-Away · Maputo</div>
+          <p class="footer-desc">Sabores autênticos preparados com ingredientes frescos, para o seu prazer.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Menu</div>
+          <ul class="footer-links">
+            <li><a href="#menu" onclick="openTab('entradas')">Entradas & Saladas</a></li>
+            <li><a href="#menu" onclick="openTab('sandes')">Sandes & Hambúrgueres</a></li>
+            <li><a href="#menu" onclick="openTab('refeicoes')">Refeições</a></li>
+            <li><a href="#menu" onclick="openTab('mariscos')">Mariscos & Peixe</a></li>
+            <li><a href="#menu" onclick="openTab('pizzas')">Pizzas</a></li>
+            <li><a href="#menu" onclick="openTab('bebidas')">Bebidas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contacto</div>
+          <ul class="footer-links">
+            <li><a href="tel:+258878743430">📞 +258 87 874 3430</a></li>
+            <li><a href="https://wa.me/258878743430" target="_blank">💬 WhatsApp</a></li>
+            <li><span>📍 R. Artur do Canto Resende nº 1.390</span></li>
+            <li><span>🏙️ Maputo, Moçambique</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <span>© 2025 Íris Sabores · Todos os direitos reservados</span>
+        <span>Desenvolvido com ❤️ em Maputo</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/258878743430" target="_blank" class="wa-fab" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="js/app.js"></script>
+</body>
+</html>
