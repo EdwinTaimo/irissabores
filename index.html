@@ -2552,6 +2552,32 @@ function toast(msg, type = 'info') {
 }
 
 
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAWOjopJgrTxH_4-eNRhZKzJGFyUZ4nRYY",
+    authDomain: "irissabores-80c7d.firebaseapp.com",
+    databaseURL: "https://irissabores-80c7d-default-rtdb.firebaseio.com",
+    projectId: "irissabores-80c7d",
+    storageBucket: "irissabores-80c7d.firebasestorage.app",
+    messagingSenderId: "486192502116",
+    appId: "1:486192502116:web:3ce534b762ff63f3ba1671",
+    measurementId: "G-LYVC3XMQGX"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+
 </script>
 </body>
 </html>
