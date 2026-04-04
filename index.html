@@ -2553,28 +2553,50 @@ function toast(msg, type = 'info') {
 
 
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyAWOjopJgrTxH_4-eNRhZKzJGFyUZ4nRYY",
     authDomain: "irissabores-80c7d.firebaseapp.com",
     databaseURL: "https://irissabores-80c7d-default-rtdb.firebaseio.com",
     projectId: "irissabores-80c7d",
-    storageBucket: "irissabores-80c7d.firebasestorage.app",
-    messagingSenderId: "486192502116",
-    appId: "1:486192502116:web:3ce534b762ff63f3ba1671",
-    measurementId: "G-LYVC3XMQGX"
+    storageBucket: "irissabores-80c7d.appspot.com",
+    messagingSenderId: "109315579624",
+    appId: "1:109315579624:web:654388e404b9804e769e6b"
   };
 
-  // Initialize Firebase
+  // Inicializar o Firebase e a Base de Dados
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  const db = getDatabase(app);
+
+  // --- FUNÇÕES PARA O SEU SITE ---
+
+  // 1. Gravar um Novo Pedido/Venda
+  window.registarVenda = function(dadosVenda) {
+    const listaVendasRef = ref(db, 'vendas');
+    const novaVendaRef = push(listaVendasRef);
+    set(novaVendaRef, {
+      cliente: dadosVenda.cliente || "Anónimo",
+      itens: dadosVenda.itens,
+      total: dadosVenda.total,
+      data: new Date().toLocaleString(),
+      metodo: "M-Pesa"
+    }).then(() => {
+      console.log("Venda guardada no Firebase!");
+    });
+  };
+
+  // 2. Sincronizar o Inventário em Tempo Real
+  const stockRef = ref(db, 'stock');
+  onValue(stockRef, (snapshot) => {
+    const dados = snapshot.val();
+    if (dados) {
+      console.log("Stock atualizado:", dados);
+      // Aqui você chamaria a sua função de UI para atualizar os números no ecrã
+      // Exemplo: atualizarInterfaceStock(dados);
+    }
+  });
 </script>
 
 
